@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Talon</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+	<title>Система учета талонов | <%= yield(:title) %></title>
+	<%= stylesheet_link_tag    "application", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+	<header class="navbar navbar-fixed-top custom-navigation">
+		<nav class="navbar-inner custom-navigation">
+			<div class="container">
+			<%= render "layouts/navigation" %>
+			</div>
+		</nav>
+	</header>
+	<%= yield %>
+	
 </body>
 </html>

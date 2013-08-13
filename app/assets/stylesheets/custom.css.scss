@@ -1,0 +1,65 @@
+@import "bootstrap";
+
+html {
+	min-height: 100%
+}
+body {
+	padding-top: 40px;
+	background: url(background-light.png) left top repeat-x #e3e3e3;
+	height: 100%
+}
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1;
+}
+
+h1 {
+	font-size: 3em;
+	letter-spacing: -2px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+h2 {
+	font-size: 1.7em;
+	letter-spacing: -1px;
+	margin-bottom: 30px;
+	text-align: left;
+	font-weight: normal;
+	color: #999;
+}
+
+p {
+	font-size: 1.1em;
+	line-height: 1.5em;
+}
+
+.custom-navigation {
+     height: 30%;
+}
+
+.button-signin {
+	min-width: 150px;
+	max-width: 150px;
+}
+
+.container-signin {
+	max-width: 700px;
+	min-height: 300px;
+	padding: 19px 29px 29px;
+	margin: 0 auto 20px;
+	border: 1px solid #e5e5e5;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+	box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+.form-signin {
+	max-width: 300px;
+	padding: 19px 29px 29px;
+	border-right: 1px solid #e5e5e5;
+}
