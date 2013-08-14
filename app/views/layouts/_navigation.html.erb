@@ -1,26 +1,21 @@
 <% if signed_in? %>
-<ul class="nav">
-  <li class="divider-vertical"></li>
-  <li class="dropdown">
-   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-print"></i>
-   Отчеты
-     <b class="caret"></b>
-    </a>
-    <ul class="dropdown-menu">
-      <li><a href="#"><i class="icon-th-list"></i> Отчеты по выдаче</a></li>
-      <li><a href="#"><i class="icon-th-list"></i> Отчеты по реализации</a></li>
-      <li><a href="#"><i class="icon-th-list"></i> Отчеты по списанию</a></li>
-    </ul>
-  </li>
-  <li class="divider-vertical"></li>
-  <li><a href="#"><i class="icon-remove"></i> Списать талоны</a></li>
-  <li class="divider-vertical"></li>
-  <li><a href="#"><i class="icon-file"></i> Выдать талоны</a></li>
-  <li class="divider-vertical"></li>
-  <li><a href="#"><i class="icon-list-alt"></i> Цены</a></li>
-  <li class="divider-vertical"></li>
-  <li><%= link_to "Выйти", signout_path, method: "delete" %></li>
-</ul>
+
+<%=content_tag :ul, class: "nav" do %>
+<%=render "layouts/navigation/menuTalons" %> 
+<%=content_tag :li, "",class: "divider-vertical"%>
+<%=render "layouts/navigation/menuReports" %> 
+<%=content_tag :li, "",class: "divider-vertical"%>
+<%=render "layouts/navigation/menuSubjects" %> 
+<%=content_tag :li, "",class: "divider-vertical"%>
+<%=content_tag :li, link_to(content_tag(:i,"",class: "icon-th-list") + " Цены","#")%>
+<%=content_tag :li, "",class: "divider-vertical"%>
+<% end %>
+
+<%=content_tag :ul, class: "nav pull-right" do %>
+<%=content_tag :li, "",class: "divider-vertical"%>
+<%=content_tag :li, link_to(content_tag(:i,"",class: "icon-user") +  " " + current_user.name.to_s + " | Выход",signout_path,method: "delete")%>
+<% end %>
+
 <% else %>
 Не авторизован
 <% end %>

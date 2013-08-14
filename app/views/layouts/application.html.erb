@@ -10,11 +10,15 @@
 	<header class="navbar navbar-fixed-top custom-navigation">
 		<nav class="navbar-inner custom-navigation">
 			<div class="container">
-			<%= render "layouts/navigation" %>
+				<%= render "layouts/navigation" %>
 			</div>
 		</nav>
 	</header>
-	<%= yield %>
-	
+	<div class="row">
+		<div class="span12" style="float: none; margin: 0 auto;">
+			<%= render "layouts/messages" %>
+			<%= yield %>
+		</div>
+	</div>
 </body>
 </html>

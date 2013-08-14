@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 	def create
 		user = User.find_by_name(params[:session][:name])
 		if user && user.authenticate(params[:session][:password])
-			flash.now[:notice] = "Добро пожаловать."
+			flash[:notice] = "Добро пожаловать " + user.name.to_s
 			sign_in user
 			redirect_to user
 		else

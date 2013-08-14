@@ -6,15 +6,10 @@
 			<div class="span5">
 				<%= form_for(:session, url: sessions_path, html: {class: "form-signin"}) do |f| %>
 				<%= image_tag("logo.png", style: "padding-bottom: 10px", width: "200px") %>
-				<%= render "layouts/messages" %>
 				<div class="control-group">
 					<%= f.text_field :name, placeholder: "Имя пользователя", class: "input-block-level" %>
 					<%= f.password_field :password, placeholder: "Пароль", class: "input-block-level" %>
-					<%= f.submit "Вход", class: "btn button-signin" %>
-					<label class="checkbox inline pull-right">
-						<%= f.check_box :checkRemember %> <%= f.label :checkRemember, "Запомнить меня", 
-						class: "muted" %> 
-					</label>
+					<%= f.submit "Вход", class: "btn btn-block" %>
 				</div>
 				<% end %>
 			</div>
