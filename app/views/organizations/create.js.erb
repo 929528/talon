@@ -1,0 +1,10 @@
+<% if @organization.errors.any? %>
+$("#form_errors").html("<%= escape_javascript(render partial: ("shared/error_messages"), locals:{name: @organization})%>");
+$("#form_errors").show(300);
+<% else %>
+$("#form_errors").hide(300);
+$(":input:not(input[type=submit])").val("");
+$("#organizations").html("<%= escape_javascript( render(partial: "organizations"))  %>");
+$("#flash_notice").html("<%= escape_javascript( render(partial: "shared/flashNotice"))  %>");
+$("#addModal").modal('hide');
+<% end %>

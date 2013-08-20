@@ -1,21 +1,32 @@
+# encoding: utf-8
 class OrganizationsController < ApplicationController
+	
+	before_filter :load
 
-	def index
-		@organizations = Organization.all
+	def load
+		@organizations = Organization.paginate(page: params[:page], per_page: 6)
+		@organization = Organization.new
+		@organization.departments.new(name: "Основное подразделение")
 	end
 
-	def new
+	def index
 	end
 
 	def create
-	end
-
-	def show
-	end
-
-	def edit
-	end
-
-	def update
+		@organization = Organization.new(params[:organization])
+		if @organization.save
+			flash[:notice] = "Организация добавлена"
+			respond_to do |format|
+				format.html { redirect_to organizations_path }
+				format.js
+			end
+		else
+			flash[:error] = "Ошибка"
+			respond_to do |format|
+				format.html { redirect_to organizations_path }
+				format.js
+			end
+		end
 	end
 end
+

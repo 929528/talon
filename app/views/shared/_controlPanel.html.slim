@@ -1,0 +1,4 @@
+- if defined?(add)
+	= link_to(content_tag(:i,"",class: "icon-plus-sign") + " Добавить","##{:add}Modal", class: "btn btn-link", data: {toggle: "modal"}, role: "button")
+
+	== render partial: "shared/modal", locals: {type: :add}

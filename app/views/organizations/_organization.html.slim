@@ -1,0 +1,4 @@
+div
+	= "Нмя: #{organization.name} Полное имя: #{organization.fullname} Колличество подразделений: #{organization.departments.count} -> #{organization.departments.map { |o| o.name }.join }"
+	hr
+

@@ -4,8 +4,6 @@ class User < ActiveRecord::Base
 	has_secure_password
 
 	belongs_to :role
-	belongs_to :organization
-	belongs_to :department
 
 	before_save { |user| user.email = email.downcase }
 	before_save :create_remember_token
@@ -16,8 +14,6 @@ class User < ActiveRecord::Base
 	uniqueness: { case_sensitive: false }
 	validates :password, presence: true, length: {minimum: 6, maximum: 15}
 	validates :password_confirmation, presence: true
-	validates :organization_id, presence: true
-	validates :department_id, presence: true
 	validates :role_id, presence: true
 
 	protected

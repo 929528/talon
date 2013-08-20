@@ -1,0 +1,15 @@
+= provide(:title, "Авторизация")
+
+.container
+	.container-signin
+		.row
+			.span5
+				= simple_form_for :session, url: sessions_path, html: {class: "form-signin"} do |f|
+					= image_tag("logo.png", style: "padding-bottom: 10px", width: "200px")
+					.control-group
+					= f.input :name, input_html: {class: "input-block-level"}, label: false, placeholder: "Имя пользователя"
+					= f.input :password, input_html: {class: "input-block-level"}, label: false, placeholder: "Пароль"
+					= f.button :submit, "Войти", class: "btn-block"
+			.span4
+				h2 Портал XADO<br>позволяет вести учет нефтепродуктов корпорации
+				p Вы можете авторизоваться, используя Вашу учетную запись. Или обратиться в службу поддержки для предоставления доступа.

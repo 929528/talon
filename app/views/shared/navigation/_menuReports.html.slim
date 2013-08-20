@@ -1,0 +1,5 @@
+li.dropdown
+	= link_to (content_tag(:i, "", class: "icon-th-list") + " Отчеты" + content_tag(:b,"",class: "caret")), '#', class: "dropdown-toggle", data: {toggle: "dropdown"}
+	ul.dropdown-menu
+		li = link_to(content_tag(:i,"",class: "icon-th-list") + " Списание","#")
+		li = link_to(content_tag(:i,"",class: "icon-th-list") + " Выдача","#")

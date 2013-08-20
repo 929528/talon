@@ -1,0 +1,17 @@
+DOCTYPE html
+html
+	head
+		title= full_title yield(:title)
+		= stylesheet_link_tag "application", :media => "all"
+		= javascript_include_tag "application"
+		= csrf_meta_tags
+	body
+		header.navbar.navbar-fixed-top.custom-navigation
+			nav.navbar-inner.custom-navigation
+				div.container
+					== render "shared/navigation"
+		div.row
+			div.span12 style="float: none; margin: 0 auto;"
+				div#flash_notice
+					== render "shared/flashNotice"
+				= yield

@@ -1,0 +1,27 @@
+div id="organization-form"
+	.tabbable.tabs-left
+		ul.nav.nav-tabs
+			li.active
+				a href="#tab1" data-toggle="tab" Наименование
+			li
+				a href="#tab2" data-toggle="tab" Подразделения
+			li
+				a href="#tab3" data-toggle="tab" Контакты
+
+		= simple_form_for @organization, html: {class: "form-horizontal"}  do |f|
+
+			.tab-content
+				#tab1.tab-pane.active
+					== render "organization_fields", f: f
+				#tab2.tab-pane
+					/= $('#links').bind 'cocoon:before-insert', (e, insertedItem) -> alert("cool") 
+
+					#links
+						= render "department_links"
+					#tasks
+						= f.simple_fields_for :departments do |department|
+							= render "department_fields", f: department
+						.links
+							= link_to_add_association 'add task', f, :departments, class: "btn", id: "qqqqqq"
+				#tab3.tab-pane
+					p Section 3

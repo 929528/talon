@@ -1,9 +1,0 @@
-<%=content_tag :li , class: "dropdown" do %>
-<%=link_to (content_tag(:i, "", class: "icon-th-list") + " Талоны" + content_tag(:b,"",class: "caret")), '#', 
-class: "dropdown-toggle", data: {toggle: "dropdown"} %>
-<%=content_tag :ul, class: "dropdown-menu" do %>
-<%=content_tag :li, link_to(content_tag(:i,"",class: "icon-th-list") + " Выдать талоны","#")%>
-<%=content_tag :li, link_to(content_tag(:i,"",class: "icon-th-list") + " Списать талоны","#")%>
-<%=content_tag :li, link_to(content_tag(:i,"",class: "icon-th-list") + " Информация о талоне","#")%>
-<% end %>
-<% end %>

@@ -7,9 +7,8 @@ class SessionsController < ApplicationController
 	def create
 		user = User.find_by_name(params[:session][:name])
 		if user && user.authenticate(params[:session][:password])
-			flash[:notice] = "Добро пожаловать " + user.name.to_s
 			sign_in user
-			redirect_to user
+			redirect_to user, error: "Добро пожаловать " + user.name.to_s
 		else
 			flash.now[:error] = 'Неверное имя пользователя или пароль.' 
 			render 'new'
