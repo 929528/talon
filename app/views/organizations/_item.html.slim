@@ -1,0 +1,12 @@
+tr
+	td.text-center
+		= index+1
+	td
+		= item.name
+	td
+		= item.fullname
+	td
+		- item.departments.each_with_index do |dep, index|
+			p="#{index+1}: #{dep.fullname}"
+	td.text-center
+		= link_to(content_tag(:i,"",class: "icon-wrench"),edit_organization_path(item), class: "btn")

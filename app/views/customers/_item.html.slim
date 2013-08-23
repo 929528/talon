@@ -1,0 +1,9 @@
+tr
+	td.text-center
+		= index+1
+	td
+		= item.name
+	td
+		= item.fullname
+	td.text-center
+		= link_to(content_tag(:i,"",class: "icon-wrench"),edit_customer_path(item), class: "btn")

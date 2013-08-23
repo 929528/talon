@@ -1,0 +1,18 @@
+#form_errors style="display: none"
+= simple_nested_form_for @organization, html: {class: "form-horizontal"}, remote: true do |f|
+	.tabbable
+		ul.nav.nav-tabs
+			li.active
+				a href="#tab1" data-toggle="tab" Наименование
+			li
+				a href="#tab2" data-toggle="tab" Подразделения
+		.tab-content
+			#tab1.tab-pane.active
+				== render "item_form_fields", f: f
+			#tab2.tab-pane
+				= f.simple_fields_for :departments  do |department|
+					= render "departments/item_form_fields", f: department
+				.text-center
+					p= f.link_to_add "Добавить подразделение", :departments
+	hr
+	= f.button :submit,"Сохранить", class: "btn-primary pull-right"
