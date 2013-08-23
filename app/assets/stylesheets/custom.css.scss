@@ -10,9 +10,9 @@ body {
 }
 body .modal {
     /* new custom width */
-    width: 750px;
+    width: 600px;
     /* must be half of the width, minus scrollbar on the left (30px) */
-    margin-left: -375px;
+    margin-left: -300px;
 }
 /* typography */
 
@@ -77,4 +77,12 @@ p {
 .field_with_errors {
   @extend .control-group;
   @extend .error;
+}
+
+.form_fields {
+	padding: 20px 20px 20px;
+	border: 1px solid #e5e5e5;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }

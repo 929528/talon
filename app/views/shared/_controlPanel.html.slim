@@ -1,4 +1,5 @@
-- if defined?(add)
-	= link_to(content_tag(:i,"",class: "icon-plus-sign") + " Добавить","##{:add}Modal", class: "btn btn-link", data: {toggle: "modal"}, role: "button")
-
-	== render partial: "shared/modal", locals: {type: :add}
+.navbar
+	.navbar-inner
+		- if defined?(btn[:add])
+			= link_to(content_tag(:i,"",class: "icon-plus-sign") + " #{btn[:add]}","#addModal", class: "btn", data: {toggle: "modal"}, role: "button")
+== (render partial: "item_form", layout: "shared/modal", locals: {header: btn[:add]}) if defined? btn[:add]

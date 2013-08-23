@@ -1,4 +1,0 @@
-ul.nav.nav-tabs
-	- @organization.departments.each_with_index do |item, index| 
-		li class="#{(index == 0)? "active" : ""}" 
-			a href="#tab-department#{index}" data-toggle="tab" = item.name

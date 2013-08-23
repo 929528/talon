@@ -1,5 +1,5 @@
 class Department < ActiveRecord::Base
-  attr_accessible :name, :fullname
+  attr_accessible :name, :fullname, :phone, :address, :responsible
 
   belongs_to :organization
 
@@ -10,7 +10,7 @@ class Department < ActiveRecord::Base
   private
 
   def set_fullname
-  	self.fullname = self.name if self.fullname.nil?
+  	self.fullname = self.name if self.fullname.blank?
   end
 
 end

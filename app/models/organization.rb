@@ -1,7 +1,7 @@
 class Organization < ActiveRecord::Base
 	attr_accessible :name, :fullname, :departments_attributes
 	has_many :departments
-	accepts_nested_attributes_for :departments, :reject_if => :all_blank, :allow_destroy => true
+	accepts_nested_attributes_for :departments
 
 	before_save :set_fullname
 	
@@ -12,6 +12,6 @@ class Organization < ActiveRecord::Base
 	private
 
 	def set_fullname
-		self.fullname = self.name if self.fullname.nil?
+		self.fullname = self.name if self.fullname.blank?
 	end
 end

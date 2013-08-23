@@ -1,10 +1,5 @@
-/ Шапка
 = provide(:title, "Организации")
-= provide(:modalTitle, "Добавить новую организацию")
 
-/коммандная панель
-#commandPanel.row.row-commandPanel
-	== render partial: "shared/controlPanel" ,locals: {add: true}
+== render "shared/controlPanel", btn: {add: "Создать организацию"}
 
-/тело
-== render partial: "organizations" 
+== render "items_list", items: @organizations 

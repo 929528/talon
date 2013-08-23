@@ -35,7 +35,6 @@ GEM
     bootstrap-will_paginate (0.0.6)
       will_paginate
     builder (3.0.4)
-    cocoon (1.2.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -132,7 +131,6 @@ DEPENDENCIES
   bcrypt-ruby (= 3.0.1)
   bootstrap-sass (= 2.3.2)
   bootstrap-will_paginate (= 0.0.6)
-  cocoon (= 1.2.0)
   coffee-rails (= 3.2.2)
   jquery-rails (= 2.0.2)
   mysql2
