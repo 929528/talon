@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130818212706) do
+ActiveRecord::Schema.define(:version => 20130827081431) do
 
   create_table "access_history", :force => true do |t|
     t.integer "user_id"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(:version => 20130818212706) do
     t.string   "fullname"
   end
 
+  create_table "products", :force => true do |t|
+    t.string   "name"
+    t.string   "fullname"
+    t.float    "price"
+    t.string   "idsymbol"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -57,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20130818212706) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "remember_token"
+    t.string   "fullname"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

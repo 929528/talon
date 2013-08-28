@@ -1,5 +1,4 @@
 #form_errors style="display: none"
 = simple_form_for @customer, html: {class: "form-horizontal"}, remote: true do |f|
-	== render "item_form_fields", f: f
-	hr
-	= f.button :submit,"Сохранить", class: "btn-primary pull-right"
+	= f.input :name, label: "Наименование"
+	= f.input :fullname, label: "Полное наименование"

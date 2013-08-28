@@ -8,11 +8,10 @@
 				a href="#tab2" data-toggle="tab" Подразделения
 		.tab-content
 			#tab1.tab-pane.active
-				== render "item_form_fields", f: f
+				= f.input :name, label: "Наименование"
+				= f.input :fullname, label: "Полное наименование"
 			#tab2.tab-pane
 				= f.simple_fields_for :departments  do |department|
 					= render "departments/item_form_fields", f: department
 				.text-center
 					p= f.link_to_add "Добавить подразделение", :departments
-	hr
-	= f.button :submit,"Сохранить", class: "btn-primary pull-right"

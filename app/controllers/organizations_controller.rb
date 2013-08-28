@@ -4,7 +4,7 @@ class OrganizationsController < ApplicationController
 	before_filter :load
 
 	def load
-		@organizations = Organization.paginate(page: params[:page], per_page: 7)
+		@organizations = Organization.paginate(page: params[:page], per_page: 15)
 		@organization = Organization.new
 		@organization.departments.new(name: "Основное подразделение")
 	end
@@ -12,21 +12,28 @@ class OrganizationsController < ApplicationController
 	def index
 	end
 
-	def create
-		@organization = Organization.new(params[:organization])
-		if @organization.save
-			flash.now[:notice] = "Организация: #{@organization.fullname} успешно добавлена"
-			respond_to do |format|
-				format.html { redirect_to organizations_path }
-				format.js
-			end
-		else
-			flash.now[:error] = "Произошла ошибка при заполнении формы, организация: #{@organization.fullname} не сохранена"
-			respond_to do |format|
-				format.html { redirect_to organizations_path }
-				format.js 
-			end
+	def new
+		respond_to do |format|
+			format.html {  }
+			format.js { render partial: "shared/subjects/js/new" }
 		end
 	end
-end
 
+	def create
+		@organization = Organization.new(params[:organization])
+		create_item @organization, @organizations
+	end
+
+	def edit
+		@organization = Organization.find(params[:id])
+		respond_to do |format|
+			format.html { redirect_to organizations_path }
+			format.js { render partial: "shared/subjects/js/edit", locals:{item: @organization}}
+		end
+	end
+
+	def update
+		@organization = Organization.find(params[:id])
+		update_item @organization, @organizations
+	end
+end

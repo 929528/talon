@@ -1,5 +1,5 @@
 .navbar
 	.navbar-inner
 		- if defined?(btn[:add])
-			= link_to(content_tag(:i,"",class: "icon-plus-sign") + " #{btn[:add]}","#addModal", class: "btn", data: {toggle: "modal"}, role: "button")
-== (render partial: "item_form", layout: "shared/modal", locals: {header: btn[:add]}) if defined? btn[:add]
+			= link_to(content_tag(:i,"",class: "icon-plus-sign") + " #{btn[:add]}", {action: "new"}, remote: true, class: "btn")
+#modal_item

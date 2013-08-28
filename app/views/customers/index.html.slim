@@ -2,4 +2,6 @@
 
 == render "shared/controlPanel", btn: {add: "Создать контрагента"}
 
-== render "items_list", items: @customers
+== render "shared/subjects/items_list", items: @customers
+
+= will_paginate class: "pagination pagination-centered"

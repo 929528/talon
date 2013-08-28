@@ -4,7 +4,7 @@ $("#form_errors").show(300);
 <% else %>
 $("#form_errors").hide(300);
 $(":input:not(input[type=submit])").val("");
-$("#list").html("<%= escape_javascript( render("items_list", items: items))  %>");
+$("#list").html("<%= escape_javascript( render("shared/subjects/items_list", items: items))  %>");
 $("#flash_notice").html("<%= escape_javascript( render(partial: "shared/flashNotice"))  %>");
-$("#addModal").modal('hide');
+$("#modal").modal('hide');
 <% end %>

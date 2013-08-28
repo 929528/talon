@@ -2,4 +2,6 @@
 
 == render "shared/controlPanel", btn: {add: "Создать организацию"}
 
-== render "items_list", items: @organizations 
+== render "shared/subjects/items_list", items: @organizations 
+
+= will_paginate class: "pagination pagination-centered"

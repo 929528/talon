@@ -8,12 +8,7 @@ body {
 	background: url(background-light.png) left top repeat-x #e3e3e3;
 	height: 100%
 }
-body .modal {
-    /* new custom width */
-    width: 600px;
-    /* must be half of the width, minus scrollbar on the left (30px) */
-    margin-left: -300px;
-}
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -30,12 +25,15 @@ h1 {
 h2 {
 	font-size: 1.7em;
 	letter-spacing: -1px;
-	margin-bottom: 30px;
 	text-align: left;
 	font-weight: normal;
 	color: #999;
 }
-
+h3 {
+	text-align: left;
+	font-weight: normal;
+	color: #999;
+}
 p {
 	font-size: 1.1em;
 	line-height: 1.5em;
@@ -66,17 +64,17 @@ p {
 }
 
 #error_explanation {
-  color: #f00;
-  ul {
-    list-style: none;
-    margin: 0 0 18px 0;
-    font-size: 90%;
-  }
+	color: #f00;
+	ul {
+		list-style: none;
+		margin: 0 0 18px 0;
+		font-size: 90%;
+	}
 }
 
 .field_with_errors {
-  @extend .control-group;
-  @extend .error;
+	@extend .control-group;
+	@extend .error;
 }
 
 .form_fields {
@@ -85,4 +83,8 @@ p {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
+}
+
+.modal-body {
+	max-height: 300px;
 }
