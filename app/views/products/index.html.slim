@@ -1,0 +1,7 @@
+= provide(:title, "Нефтепродукты")
+
+== render "shared/controlPanel", btn: {add: "Создать нефтепродукт"}
+
+== render "shared/subjects/items_list", items: @products
+
+= will_paginate class: "pagination pagination-centered"

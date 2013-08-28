@@ -1,0 +1,10 @@
+javascript:
+    $(document).ready(function() {
+      $('#modal .btn.btn-primary').click(function() {
+        $('form').submit();
+      });
+    });
+.modal.hide.fade.in id="modal" tabindex="-1" role="dialog" hidden="true"
+	== render partial: "shared/modal/header", locals:{item: item ||=false}
+	== render "shared/modal/body"
+	== render "shared/modal/footer"
