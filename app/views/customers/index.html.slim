@@ -1,6 +1,6 @@
 = provide(:title, "Контрагенты")
 
-== render "shared/controlPanel", btn: {add: "Создать контрагента"}
+== render partial: "shared/controlPanel", locals:{btn: {add: "Создать контрагента"}, item: @customer}
 
 == render "shared/subjects/items_list", items: @customers
 

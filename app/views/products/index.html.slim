@@ -1,6 +1,6 @@
 = provide(:title, "Нефтепродукты")
 
-== render "shared/controlPanel", btn: {add: "Создать нефтепродукт"}
+== render partial: "shared/controlPanel", locals:{ btn: {add: "Создать нефтепродукт"}, item: @product}
 
 == render "shared/subjects/items_list", items: @products
 

@@ -1,9 +1,5 @@
 Talon::Application.routes.draw do
-  resources :users
-  resources :organizations
-  resources :customers
-  resources :departments
-  resources :products
+  resources :users, :organizations, :customers, :departments, :products
 
   resources :sessions, only: [:new, :create, :destroy]
 

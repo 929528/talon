@@ -20,4 +20,4 @@ tr
 		td
 			= item.role.name if defined? item.role.name
 	td.text-center
-		= link_to(content_tag(:i,"",class: "icon-wrench")+ " изменить",edit_item_path(item), class: "btn  btn-link", remote: true)
+		= link_to(content_tag(:i,"",class: "icon-wrench")+ "",edit_item_path(item), class: "btn btn-small", rel: "tooltip", title: "Редактировать", remote: true)

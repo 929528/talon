@@ -1,7 +1,8 @@
 = provide(:title, "Пользователи")
 
-== render "shared/controlPanel", btn: {add: "Создать пользователя"}
+== render partial: "shared/controlPanel", locals: {btn: {add: "Создать пользователя"},item: @user }
 
 == render "shared/subjects/items_list", items: @users
+
 
 = will_paginate class: "pagination pagination-centered"

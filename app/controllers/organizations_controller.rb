@@ -4,12 +4,20 @@ class OrganizationsController < ApplicationController
 	before_filter :load
 
 	def load
-		@organizations = Organization.paginate(page: params[:page], per_page: 15)
+		if (defined? params[:filter]) && !(params[:filter].blank?)
+			@organizations = Organization.where("name = ?", params[:filter])
+		else
+			@organizations = Organization.paginate(page: params[:page], per_page: 9)
+		end
 		@organization = Organization.new
 		@organization.departments.new(name: "Основное подразделение")
 	end
 
 	def index
+		respond_to do |format|
+			format.html {  }
+			format.js { render partial: "shared/subjects/js/filter", locals: {items: @organizations} }
+		end
 	end
 
 	def new
@@ -35,5 +43,7 @@ class OrganizationsController < ApplicationController
 	def update
 		@organization = Organization.find(params[:id])
 		update_item @organization, @organizations
+	end
+	def filter
 	end
 end

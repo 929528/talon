@@ -4,11 +4,19 @@ class CustomersController < ApplicationController
 	before_filter :load
 	
 	def load
-		@customers = Customer.paginate(page: params[:page], per_page: 15)
+		if (defined? params[:filter]) && !(params[:filter].blank?)
+			@customers = Customer.where("name = ?", params[:filter])
+		else
+			@customers = Customer.paginate(page: params[:page], per_page: 9)
+		end
 		@customer = Customer.new
 	end
 
 	def index
+		respond_to do |format|
+			format.html {  }
+			format.js { render partial: "shared/subjects/js/filter", locals: {items: @customers} }
+		end
 	end
 
 	def new

@@ -1,9 +1,8 @@
 .modal-header
 	button.close type="button" data-dismiss="modal" aria-hidden="true" x
 	h2#myModalLabel.text-info
-		blockquote
-			- if item
-				h3 Редактировать элемент справочника
-				h4 = item.fullname
-			- else
-				h3 Добавить новый элемент справочника
+		- if item
+			h3 Редактировать элемент справочника
+			h4 = item.fullname
+		- else
+			h3 Добавить новый элемент справочника

@@ -4,11 +4,19 @@ class UsersController < ApplicationController
 	before_filter :load
 	
 	def load
-		@users = User.paginate(page: params[:page], per_page: 15)
+		if (defined? params[:filter]) && !(params[:filter].blank?)
+			@users = User.where("name = ?", params[:filter])
+		else
+			@users = User.paginate(page: params[:page], per_page: 9)
+		end
 		@user = User.new
 	end
 	
 	def index
+		respond_to do |format|
+			format.html {  }
+			format.js { render partial: "shared/subjects/js/filter", locals: {items: @users} }
+		end
 	end
 
 	def show
