@@ -7,7 +7,7 @@ class OrganizationsController < ApplicationController
 		if (defined? params[:filter]) && !(params[:filter].blank?)
 			@organizations = Organization.where("name = ?", params[:filter])
 		else
-			@organizations = Organization.paginate(page: params[:page], per_page: 9)
+			@organizations = Organization.paginate(page: params[:page], per_page: 7)
 		end
 		@organization = Organization.new
 		@organization.departments.new(name: "Основное подразделение")

@@ -6,12 +6,11 @@ html
 		= javascript_include_tag "application"
 		= csrf_meta_tags
 	body
-		header.navbar.navbar-fixed-top.custom-navigation
-			nav.navbar-inner.custom-navigation
-				div.container
-					== render "shared/navigation"
-		div.row
-			div.span12 style="float: none; margin: 0 auto;"
-				div#flash_notice
-					== render "shared/flashNotice"
-				= yield
+		#wrap
+			header.navbar.navbar-fixed-top
+				nav.navbar-inner
+					.container
+						== render "shared/navigation"
+			.container
+				.row.row-fixed
+					= yield

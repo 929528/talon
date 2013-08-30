@@ -2,6 +2,8 @@
 
 .container
 	.container-signin
+		#flash_notice
+				== render "shared/flashNotice"
 		.row
 			.span5
 				= simple_form_for :session, url: sessions_path, html: {class: "form-signin"} do |f|
