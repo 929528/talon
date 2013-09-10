@@ -1,0 +1,6 @@
+.item
+	.row
+		.span12
+			= customer.fullname
+			.pull-right
+				= link_to(content_tag(:i,"",class: "icon-wrench")+ "",edit_catalog_customer_path(customer), class: "btn btn-small", rel: "tooltip", title: "Редактировать", remote: true)

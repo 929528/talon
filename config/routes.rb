@@ -1,7 +1,20 @@
 Accvouchers::Application.routes.draw do
-  resources :users, :organizations, :customers, :departments, :products, :operations
-  
-  resources :documents
+
+  namespace :catalog do
+    resources :users, :products do
+      collection do
+        get 'search'
+      end
+    end
+    resources :organizations, :customers do 
+      collection do
+        get 'search'
+      end
+      resources :departments
+    end
+  end
+
+
 
   resources :sessions, only: [:new, :create, :destroy]
 

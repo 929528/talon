@@ -1,0 +1,9 @@
+= provide(:title, "Справочник: нефтепродукты")
+
+= content_for :control_panel do
+	== render "shared/control_panel", panel: {btn: {add: {title: "Добавить нефтепродукт", action: "new"}}, filter: {action: search_catalog_products_path, items: @products}}
+
+#list
+	== render @products
+
+= will_paginate class: "pagination pagination-centered"

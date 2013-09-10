@@ -1,9 +1,0 @@
-= provide(:title, "Справочник: организации")
-
-= content_for :control_panel do
-	== render "shared/control_panel", panel: {btn: {add: {title: "Добавить организацию", action: "new"}}, filter: @organization}
-
-#list
-	== render @organizations
-
-= will_paginate class: "pagination pagination-centered"

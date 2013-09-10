@@ -1,0 +1,10 @@
+= provide(:title, "Справочник: пользователи")
+
+= content_for :control_panel do
+	== render "shared/control_panel", panel: {btn: {add: {title: "Добавить пользователя", action: "new"}}, filter: {action: search_catalog_users_path, items: @users}}
+
+#list
+	== render @users
+
+
+= will_paginate class: "pagination pagination-centered"
