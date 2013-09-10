@@ -1,7 +1,9 @@
 = provide(:title, "Справочник: нефтепродукты")
 
-== render partial: "shared/controlPanel", locals:{ btn: {add: "Создать нефтепродукт"}, item: @product}
+= content_for :control_panel do
+	== render "shared/control_panel", panel: {btn: {add: {title: "Добавить нефтепродукт", action: "new"}}, filter: @product}
 
-== render "shared/subjects/items_list", items: @products
+#list
+	== render @products
 
 = will_paginate class: "pagination pagination-centered"

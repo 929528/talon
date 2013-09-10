@@ -8,16 +8,12 @@ body {
 	height: 100%;
 }
 
-#wrap {
-	min-height: 100%;
-	height: auto !important;
-	height: 100%;
-
-	margin: 0 auto -50px;
+.row-fixed {
+	padding-top: 80px;
 }
 
-.row-fixed {
-	padding-top: 40px;
+.alert {
+	margin-bottom: 0px;
 }
 
 /* typography */
@@ -53,7 +49,7 @@ p {
 .container-signin {
 	max-width: 700px;
 	min-height: 300px;
-	padding: 19px 29px 29px;
+	padding: 19px 19px;
 	margin: 0 auto 20px;
 	border: 1px solid #e5e5e5;
 	-webkit-border-radius: 5px;
@@ -68,6 +64,23 @@ p {
 	max-width: 300px;
 	padding: 19px 29px 29px;
 	border-right: 1px solid #e5e5e5;
+}
+
+.item {
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 5px;
+	margin-bottom: 5px;
+	border: 1px solid #e5e5e5;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+	box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.item:hover {
+	background-color: #fff;
 }
 
 #error_explanation {
@@ -100,8 +113,15 @@ form.form-inline div.control-group { display: inline-block; }
 form.form-inline div.control-group div.controls { display: inline-block; }
 
 th {
+	color: #ffffff;
 	font-weight: normal;
-	height: 30px;
-	background-color: #999;
-	color: #fff
+	text-decoration: none;
+	background-color: #0081c2;
+	background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
+	background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
+	background-image: -o-linear-gradient(top, #0088cc, #0077b3);
+	background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
 }

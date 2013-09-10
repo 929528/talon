@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Talon::Application.load_tasks
+Accvouchers::Application.load_tasks

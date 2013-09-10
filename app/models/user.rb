@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-	attr_accessible :email, :name, :fullname, :password, :password_confirmation
-
 	has_secure_password
 
 	belongs_to :role

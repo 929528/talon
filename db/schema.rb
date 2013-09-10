@@ -11,11 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130827081431) do
+ActiveRecord::Schema.define(:version => 20130907104033) do
 
   create_table "access_history", :force => true do |t|
     t.integer "user_id"
     t.string  "adress"
+  end
+
+  create_table "actionstates", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "customers", :force => true do |t|
@@ -35,6 +41,31 @@ ActiveRecord::Schema.define(:version => 20130827081431) do
     t.string   "phone"
     t.string   "fullname"
   end
+
+  create_table "documents", :force => true do |t|
+    t.datetime "date"
+    t.integer  "customer_id"
+    t.integer  "organization_id"
+    t.integer  "actionstate_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "documents", ["actionstate_id"], :name => "index_documents_on_actionstate_id"
+  add_index "documents", ["customer_id"], :name => "index_documents_on_customer_id"
+  add_index "documents", ["organization_id"], :name => "index_documents_on_organization_id"
+
+  create_table "operations", :force => true do |t|
+    t.integer  "document_id"
+    t.integer  "actionstate_id"
+    t.integer  "talon_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "operations", ["actionstate_id"], :name => "index_operations_on_actionstate_id"
+  add_index "operations", ["document_id"], :name => "index_operations_on_document_id"
+  add_index "operations", ["talon_id"], :name => "index_operations_on_talon_id"
 
   create_table "organizations", :force => true do |t|
     t.string   "name"
@@ -57,6 +88,24 @@ ActiveRecord::Schema.define(:version => 20130827081431) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "states", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "talons", :force => true do |t|
+    t.string   "amount"
+    t.string   "barcode"
+    t.integer  "product_id"
+    t.integer  "state_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "talons", ["product_id"], :name => "index_talons_on_product_id"
+  add_index "talons", ["state_id"], :name => "index_talons_on_state_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

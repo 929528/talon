@@ -1,6 +1,4 @@
 class Department < ActiveRecord::Base
-  attr_accessible :name, :fullname, :phone, :address, :responsible
-
   belongs_to :organization
 
   before_save :set_fullname

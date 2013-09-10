@@ -1,6 +1,4 @@
 class Customer < ActiveRecord::Base
-	attr_accessible :name, :fullname
-
 	before_save :set_fullname
 	
 	validates :name , presence: true, length: {maximum: 50, minimum: 4}, uniqueness: true

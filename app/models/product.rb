@@ -1,9 +1,7 @@
 class Product < ActiveRecord::Base
-	attr_accessible :name, :fullname
-
 	before_save :set_fullname
 	
-	validates :name , presence: true, length: {maximum: 50, minimum: 4}, uniqueness: true
+	validates :name , presence: true, length: {maximum: 50, minimum: 2}, uniqueness: true
 
 	default_scope order: 'products.created_at DESC'
 

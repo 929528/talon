@@ -2,6 +2,11 @@
 class SessionsController < ApplicationController
 
 	def new
+		if signed_in?
+			redirect_to current_user, error: "Добро пожаловать " + current_user.name.to_s
+		else
+			render 'new'
+		end
 	end
 
 	def create

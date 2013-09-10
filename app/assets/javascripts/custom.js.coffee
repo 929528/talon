@@ -15,13 +15,15 @@ $ ->
         input.val($(this).attr('data_default'))
         $(this).replaceWith(input)
         
-        $(input).typeahead({
+        $(input).typeahead
             source: option,
             updater: (item) ->
                 $(input).val(item)
                 $('.navbar form').submit()
                 return item
-        });
-
+                
     $('[rel="tooltip"]').each ->
         $(this).tooltip()
+
+    $('#modal').live 'focus', (e) ->
+        e.preventDefault()

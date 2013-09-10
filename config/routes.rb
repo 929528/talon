@@ -1,10 +1,12 @@
-Talon::Application.routes.draw do
-  resources :users, :organizations, :customers, :departments, :products
+Accvouchers::Application.routes.draw do
+  resources :users, :organizations, :customers, :departments, :products, :operations
+  
+  resources :documents
 
   resources :sessions, only: [:new, :create, :destroy]
 
-  match '/signin',  to: 'sessions#new'
-  match '/signout', to: 'sessions#destroy', via: :delete
+  match '/signin' => 'sessions#new', via: :get
+  match '/signout' => 'sessions#destroy', via: :delete
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

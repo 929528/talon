@@ -1,0 +1,6 @@
+.item
+	.row
+		.span12
+			= organization.fullname
+			.pull-right
+				= link_to(content_tag(:i,"",class: "icon-wrench")+ "", edit_organization_path(organization), class: "btn btn-small", rel: "tooltip", title: "Редактировать", remote: true)

@@ -3,7 +3,7 @@ $("#form_errors").html("<%= escape_javascript(render partial: ("shared/error_mes
 $("#form_errors").show(300);
 <% else %>
 $("#form_errors").hide(300);
-$("#list").html("<%= escape_javascript( render("shared/subjects/items_list", items: items))  %>");
+$("#list").html("<%= escape_javascript( render items )  %>");
 $("#flash_notice").html("<%= escape_javascript( render(partial: "shared/flashNotice"))  %>");
 $("#modal").modal('hide');
 <% end %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  date: 2013-09-07 13:38:37
+  customer: 
+  organization: 
+  actionstate: 
+
+two:
+  date: 2013-09-07 13:38:37
+  customer: 
+  organization: 
+  actionstate: 

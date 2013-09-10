@@ -1,5 +1,4 @@
 class Organization < ActiveRecord::Base
-	attr_accessible :name, :fullname, :departments_attributes
 	has_many :departments
 	accepts_nested_attributes_for :departments
 

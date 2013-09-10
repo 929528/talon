@@ -1,0 +1,18 @@
+.navbar.navbar-fixed-top
+	.navbar-inner
+		.container
+			a.brand = yield :title
+			ul.nav.pull-right
+				li
+					- if panel[:btn][:add]
+						= link_to(content_tag(:i,"",class: "icon-plus-sign") + " добавить", {action: panel[:btn][:add][:action]}, rel: "tooltip", title: "#{panel[:btn][:add][:title]}", data: {placement: "bottom"}, remote: true )
+				li.divider-vertical
+				li
+					- if panel[:filter]
+						= form_tag panel[:filter], method: :get, class: "form-inline navbar-form pull-right", remote: true
+							.input-append
+								= select_tag "filter", options_from_collection_for_select(panel[:filter].class.uniq, "id", "name"), rel: "autocomplete", placeholder: "ФИЛЬТР"
+								= button_tag(type: 'submit', class: "btn", onclick: "$('.navbar input').val('')", title: "Очистить фильтр", rel: "tooltip", data: {placement: "bottom"})
+									i.icon-remove
+	#flash_notice.text-center
+		== render "shared/flashNotice"

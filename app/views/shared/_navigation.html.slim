@@ -1,17 +1,16 @@
-- if signed_in?
-	ul.nav
-		== render "shared/navigation/menuTalons"
-		li.divider-vertical
-		== render "shared/navigation/menuReports"
-		li.divider-vertical
-		== render "shared/navigation/menuSubjects"
-		li.divider-vertical
-		li = link_to(content_tag(:i,"",class: "icon-th-list") + " Цены","#")
-		li.divider-vertical
-	ul.nav.pull-right
-		li.divider-vertical
-		li = link_to(content_tag(:i,"",class: "icon-user") +  " " + current_user.name.to_s + " | Выход",signout_path,method: "delete")
-
-- else
-	p Не авторизован
-
+.navbar.navbar-fixed-bottom
+	.navbar-inner
+		.container
+			ul.nav
+				== render "shared/navigation/menuDocuments"
+				li.divider-vertical
+				== render "shared/navigation/menuReports"
+				li.divider-vertical
+				== render "shared/navigation/menuSubjects"
+				li.divider-vertical
+				li = link_to(content_tag(:i,"",class: "icon-th-list") + " Цены","#")
+				li.divider-vertical
+			ul.nav.pull-right
+				li.divider-vertical
+				li = link_to(content_tag(:i,"",class: "icon-user") +  " " + current_user.name.to_s + " | Выход",signout_path,method: "delete")
+= yield :control_panel
