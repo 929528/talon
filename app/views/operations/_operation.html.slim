@@ -1,0 +1,11 @@
+.alert class="alert-#{operation.talon.new_record? ? "success" : "error"}"
+	a.close data-dismiss="alert" &#215;
+	.operation id="#{operation.talon.barcode}"
+		= "#{operation.talon.amount.value} #{operation.talon.barcode} #{operation.talon.product.fullname} #{operation.action.name}"
+		= simple_fields_for :document do |d|
+			= d.simple_fields_for "operation[#{operation.id}]", operation do |o|
+				= o.simple_fields_for :action, operation.action do |a|
+					= a.input_field :id, label: false, as: :hidden
+				= o.input_field :id, label: false, as: :hidden
+				= o.simple_fields_for :talon, operation.talon do |t|
+					= t.input_field :barcode, label: false, as: :hidden

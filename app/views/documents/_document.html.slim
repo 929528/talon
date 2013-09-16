@@ -1,0 +1,9 @@
+.item
+	.row
+		.span1
+			= "#{document.id} #{document.state.name} #{document.action.name}"
+		.span3
+			= document.created_at
+		.span8
+			.pull-right
+				= link_to(content_tag(:i,"",class: "icon-wrench")+ "",edit_document_path(document), class: "btn btn-small", rel: "tooltip", title: "Редактировать", data: {target: "#modal-window", toggle: "modal"}, remote: true)

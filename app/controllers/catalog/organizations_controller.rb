@@ -9,9 +9,7 @@ class Catalog::OrganizationsController < ApplicationController
 
 	def new
 		@organization = Catalog::Organization.new
-		department = @organization.departments.build(name: "Основное подразделение")
 		respond_to do |format|
-			format.html {  }
 			format.js { render partial: "shared/js/item_new" }
 		end
 	end
@@ -23,7 +21,6 @@ class Catalog::OrganizationsController < ApplicationController
 	def edit
 		@organization = Catalog::Organization.find(params[:id])
 		respond_to do |format|
-			format.html { redirect_to catalog_organizations_path }
 			format.js { render partial: "shared/js/item_edit", locals:{item: @organization}}
 		end
 	end

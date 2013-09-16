@@ -3,4 +3,4 @@
 		.span12
 			= product.fullname
 			.pull-right
-				= link_to(content_tag(:i,"",class: "icon-wrench")+ "", edit_catalog_product_path(product), class: "btn btn-small", rel: "tooltip", title: "Редактировать", remote: true)
+				= link_to(content_tag(:i,"",class: "icon-wrench")+ "", edit_catalog_product_path(product), class: "btn btn-small", rel: "tooltip", title: "Редактировать", data: {target: "#modal-window", toggle: "modal"}, remote: true)

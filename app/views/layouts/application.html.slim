@@ -6,7 +6,7 @@ html
 		= javascript_include_tag "application"
 		= csrf_meta_tags
 	body
-		#modal_form
+		#modal-window.modal.hide.fade role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
 		header
 			== render "shared/navigation" if signed_in?
 		.container

@@ -1,25 +1,22 @@
 Accvouchers::Application.routes.draw do
 
   namespace :catalog do
-    resources :users, :products do
+    resources :users, :products, :organizations, :customers do
       collection do
         get 'search'
       end
-    end
-    resources :organizations, :customers do 
-      collection do
-        get 'search'
-      end
-      resources :departments
     end
   end
 
+  resources :documents
 
+  match '/request_operation' => 'operations#new', via: :get
 
   resources :sessions, only: [:new, :create, :destroy]
 
   match '/signin' => 'sessions#new', via: :get
   match '/signout' => 'sessions#destroy', via: :delete
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

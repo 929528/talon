@@ -1,2 +1,3 @@
-$("#operations").append("<%= escape_javascript(render operation, operation: operation)%>");
-$("#talon_barcode").val('');
+$("#form_errors").hide(300);
+$('#request_barcode').val('')
+$("#operations").append("<%= escape_javascript(render item,operation: item)%>");

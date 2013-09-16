@@ -10,7 +10,6 @@ class Catalog::CustomersController < ApplicationController
 	def new
 		@customer = Catalog::Customer.new
 		respond_to do |format|
-			format.html {  }
 			format.js { render partial: "shared/js/item_new" }
 		end
 	end
@@ -21,7 +20,6 @@ class Catalog::CustomersController < ApplicationController
 	def edit
 		@customer = Catalog::Customer.find(params[:id])
 		respond_to do |format|
-			format.html { redirect_to catalog_customers_path }
 			format.js {render partial: "shared/js/item_edit", locals:{item: @customer}}
 		end
 	end

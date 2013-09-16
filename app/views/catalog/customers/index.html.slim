@@ -1,7 +1,7 @@
 = provide(:title, "Справочник: контрагенты")
 
 = content_for :control_panel do
-	== render "shared/control_panel", panel: {btn: {add: {title: "Добавить контрагента", action: "new"}}, filter: {action: search_catalog_customers_path, items: @customers}}
+	== render "shared/control_panel", panel: {btn: {add: {title: "Добавить контрагента", action: new_catalog_customer_path}}, filter: {action: search_catalog_customers_path, items: @customers}}
 
 #list
 	== render @customers

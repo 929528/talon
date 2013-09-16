@@ -13,7 +13,6 @@ gem "slim"
 gem "slim-rails", :require => false
 
 group :development, :test do
-    gem 'sqlite3'
     gem 'thin'
 end
 
@@ -23,6 +22,5 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier'
 
 gem 'jquery-rails'
-group :production do 
-gem 'mysql2'
-end
+
+gem 'pg'

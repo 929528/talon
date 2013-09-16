@@ -5,7 +5,7 @@
 			ul.nav.pull-right
 				li
 					- if panel[:btn][:add]
-						= link_to(content_tag(:i,"",class: "icon-plus-sign") + " добавить", {action: panel[:btn][:add][:action]}, rel: "tooltip", title: "#{panel[:btn][:add][:title]}", data: {placement: "bottom"}, remote: true )
+						= link_to(content_tag(:i,"",class: "icon-plus-sign") + " добавить", panel[:btn][:add][:action], rel: "tooltip", title: "#{panel[:btn][:add][:title]}", data: {target: "#modal-window", toggle: "modal"}, remote: true )
 				li.divider-vertical
 				li
 					- if panel[:filter]

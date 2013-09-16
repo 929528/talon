@@ -14,7 +14,6 @@ class Catalog::UsersController < ApplicationController
 	def new
 		@user = Catalog::User.new
 		respond_to do |format|
-			format.html {  }
 			format.js { render partial: "shared/js/item_new" }
 		end
 	end
@@ -25,7 +24,6 @@ class Catalog::UsersController < ApplicationController
 	def edit
 		@user = Catalog::User.find(params[:id])
 		respond_to do |format|
-			format.html { redirect_to catalog_users_path }
 			format.js {render partial: "shared/js/item_edit", locals:{item: @user}}
 		end
 	end

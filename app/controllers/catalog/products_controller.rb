@@ -10,7 +10,6 @@ class Catalog::ProductsController < ApplicationController
 	def new
 		@product = Catalog::Product.new
 		respond_to do |format|
-			format.html {  }
 			format.js { render partial: "shared/js/item_new" }
 		end
 	end
@@ -22,7 +21,6 @@ class Catalog::ProductsController < ApplicationController
 	def edit
 		@product = Catalog::Product.find(params[:id])
 		respond_to do |format|
-			format.html { redirect_to catalog_products_path }
 			format.js {render partial: "shared/js/item_edit", locals:{item: @product}}
 		end
 	end
@@ -38,6 +36,6 @@ class Catalog::ProductsController < ApplicationController
 	private
 
 	def product_params
-		params.require(:product).permit(:name, :fullname, :idsymbol)
+		params.require(:product).permit(:name, :fullname, :symbol)
 	end
 end

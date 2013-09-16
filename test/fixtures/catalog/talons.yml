@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  amount_id: 
+  state_id: 
+  product_id: 
+  barcode: MyString
+
+two:
+  amount_id: 
+  state_id: 
+  product_id: 
+  barcode: MyString

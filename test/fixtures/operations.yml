@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  document: 
-  actionstate: 
-  talon: 
+  document_id: 
+  talon_id: 
+  action_id: 
 
 two:
-  document: 
-  actionstate: 
-  talon: 
+  document_id: 
+  talon_id: 
+  action_id: 

@@ -9,116 +9,123 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130907104033) do
+ActiveRecord::Schema.define(version: 20130915130342) do
 
-  create_table "access_history", :force => true do |t|
-    t.integer "user_id"
-    t.string  "adress"
-  end
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
-  create_table "actionstates", :force => true do |t|
+  create_table "actions", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "customers", :force => true do |t|
-    t.string   "name"
-    t.string   "fullname"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "catalog_amounts", force: true do |t|
+    t.integer  "value"
+    t.string   "symbol"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "departments", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.integer  "organization_id"
-    t.string   "responsible"
-    t.string   "address"
-    t.string   "phone"
-    t.string   "fullname"
-  end
-
-  create_table "documents", :force => true do |t|
-    t.datetime "date"
-    t.integer  "customer_id"
-    t.integer  "organization_id"
-    t.integer  "actionstate_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
-  add_index "documents", ["actionstate_id"], :name => "index_documents_on_actionstate_id"
-  add_index "documents", ["customer_id"], :name => "index_documents_on_customer_id"
-  add_index "documents", ["organization_id"], :name => "index_documents_on_organization_id"
-
-  create_table "operations", :force => true do |t|
-    t.integer  "document_id"
-    t.integer  "actionstate_id"
-    t.integer  "talon_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
-  add_index "operations", ["actionstate_id"], :name => "index_operations_on_actionstate_id"
-  add_index "operations", ["document_id"], :name => "index_operations_on_document_id"
-  add_index "operations", ["talon_id"], :name => "index_operations_on_talon_id"
-
-  create_table "organizations", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.string   "fullname"
-  end
-
-  create_table "products", :force => true do |t|
+  create_table "catalog_customers", force: true do |t|
     t.string   "name"
     t.string   "fullname"
-    t.float    "price"
-    t.string   "idsymbol"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "roles", :force => true do |t|
+  add_index "catalog_customers", ["name"], name: "index_catalog_customers_on_name", using: :btree
+
+  create_table "catalog_organizations", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "fullname"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "states", :force => true do |t|
+  add_index "catalog_organizations", ["name"], name: "index_catalog_organizations_on_name", using: :btree
+
+  create_table "catalog_products", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "fullname"
+    t.integer  "symbol"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "talons", :force => true do |t|
-    t.string   "amount"
-    t.string   "barcode"
-    t.integer  "product_id"
+  create_table "catalog_roles", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "catalog_states", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "catalog_talons", force: true do |t|
+    t.integer  "amount_id"
     t.integer  "state_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "product_id"
+    t.string   "barcode"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "talons", ["product_id"], :name => "index_talons_on_product_id"
-  add_index "talons", ["state_id"], :name => "index_talons_on_state_id"
+  add_index "catalog_talons", ["amount_id"], name: "index_catalog_talons_on_amount_id", using: :btree
+  add_index "catalog_talons", ["barcode"], name: "index_catalog_talons_on_barcode", using: :btree
+  add_index "catalog_talons", ["product_id"], name: "index_catalog_talons_on_product_id", using: :btree
+  add_index "catalog_talons", ["state_id"], name: "index_catalog_talons_on_state_id", using: :btree
 
-  create_table "users", :force => true do |t|
+  create_table "catalog_users", force: true do |t|
     t.string   "name"
+    t.string   "fullname"
     t.string   "email"
     t.string   "password_digest"
-    t.integer  "role_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
     t.string   "remember_token"
-    t.string   "fullname"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["name"], :name => "index_users_on_name", :unique => true
+  add_index "catalog_users", ["email"], name: "index_catalog_users_on_email", using: :btree
+  add_index "catalog_users", ["name"], name: "index_catalog_users_on_name", using: :btree
+  add_index "catalog_users", ["role_id"], name: "index_catalog_users_on_role_id", using: :btree
+
+  create_table "document_states", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "documents", force: true do |t|
+    t.integer  "customer_id"
+    t.integer  "organization_id"
+    t.integer  "action_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "DocumentState_id"
+  end
+
+  add_index "documents", ["DocumentState_id"], name: "index_documents_on_DocumentState_id", using: :btree
+  add_index "documents", ["action_id"], name: "index_documents_on_action_id", using: :btree
+  add_index "documents", ["customer_id"], name: "index_documents_on_customer_id", using: :btree
+  add_index "documents", ["organization_id"], name: "index_documents_on_organization_id", using: :btree
+
+  create_table "operations", force: true do |t|
+    t.integer  "document_id"
+    t.integer  "talon_id"
+    t.integer  "action_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "operations", ["action_id"], name: "index_operations_on_action_id", using: :btree
+  add_index "operations", ["document_id"], name: "index_operations_on_document_id", using: :btree
+  add_index "operations", ["talon_id"], name: "index_operations_on_talon_id", using: :btree
 
 end
