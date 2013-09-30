@@ -1,4 +1,6 @@
 .navbar.navbar-fixed-top
+	#flash_notice
+		== render "shared/flashNotice"
 	.navbar-inner
 		.container
 			a.brand = yield :title
@@ -14,5 +16,3 @@
 								= select_tag "filter", options_from_collection_for_select(panel[:filter][:items], "id", "name"), rel: "autocomplete", placeholder: "ФИЛЬТР"
 								= button_tag(type: 'submit', class: "btn", onclick: "$('.navbar input').val('')", title: "Очистить фильтр", rel: "tooltip", data: {placement: "bottom"})
 									i.icon-remove
-	#flash_notice.text-center
-		== render "shared/flashNotice"

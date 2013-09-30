@@ -1,10 +1,7 @@
-# encoding: utf-8
 class Catalog::UsersController < ApplicationController
 
-	include CatalogHelper
-	
 	def index
-		@users = Catalog::User.paginate(page: params[:page], per_page: 10)
+		@users = Catalog::User.paginate(page: params[:page], per_page: 8)
 	end
 
 	def show
@@ -13,23 +10,33 @@ class Catalog::UsersController < ApplicationController
 
 	def new
 		@user = Catalog::User.new
-		respond_to do |format|
-			format.js { render partial: "shared/js/item_new" }
-		end
+		show_item @user
 	end
 
 	def create
-		createANDrender_catalog_item Catalog::User.new(user_params)
+		user =  Catalog::User.new(user_params)
+		if user.save
+			flash.now[:notice] = "Пользователь #{user.fullname} создан" 
+			perform_after_save user
+		else
+			flash.now[:notice] = "Произошла ошибка при создании пользователя"
+			show_errors_on user
+		end
 	end
 	def edit
 		@user = Catalog::User.find(params[:id])
-		respond_to do |format|
-			format.js {render partial: "shared/js/item_edit", locals:{item: @user}}
-		end
+		show_item @user
 	end
 
 	def update
-		updateANDrender_catalog_item Catalog::User.find(params[:id]), user_params
+		user =  Catalog::User.find(params[:id])
+		if user.update_attributes(user_params)
+			flash.now[:notice] = "Поьзователь #{user.fullname} обновлен" 
+			perform_after_save user
+		else
+			flash.now[:notice] = "Произошла ошибка при обновлении пользователя"
+			show_errors_on user
+		end
 	end
 
 	def search

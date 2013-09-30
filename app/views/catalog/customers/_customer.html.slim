@@ -1,6 +1,8 @@
-.item
-	.row
-		.span12
-			= customer.fullname
+li.media id="item_#{customer.id}"
+	i.pull-left class="#{model_icon customer }"
+	.media-body
+		h5.media-heading 
+			= "#{model_name customer } №: #{customer.id} Полное наименование: #{customer.fullname}"
 			.pull-right
+				small.date = customer.created_at.strftime "Создан: %d/%m/%Y"
 				= link_to(content_tag(:i,"",class: "icon-wrench")+ "",edit_catalog_customer_path(customer), class: "btn btn-small", rel: "tooltip", title: "Редактировать", data: {target: "#modal-window", toggle: "modal"}, remote: true)

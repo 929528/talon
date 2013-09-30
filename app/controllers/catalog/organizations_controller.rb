@@ -1,32 +1,39 @@
-# encoding: utf-8
 class Catalog::OrganizationsController < ApplicationController
 
-	include CatalogHelper
-
 	def index
-		@organizations = Catalog::Organization.paginate(page: params[:page], per_page: 10)
+		@organizations = Catalog::Organization.paginate(page: params[:page], per_page: 7)
 	end
 
 	def new
 		@organization = Catalog::Organization.new
-		respond_to do |format|
-			format.js { render partial: "shared/js/item_new" }
-		end
+		show_item @organization
 	end
 
 	def create
-		createANDrender_catalog_item Catalog::Organization.new(organization_params)
+		organization = Catalog::Organization.new(organization_params)
+		if organization.save
+			flash.now[:notice] = "Организация #{organization.fullname} создана" 
+			perform_after_save organization
+		else
+			flash.now[:notice] = "Произошла ошибка при создании организации"
+			show_errors_on organization
+		end
 	end
 
 	def edit
 		@organization = Catalog::Organization.find(params[:id])
-		respond_to do |format|
-			format.js { render partial: "shared/js/item_edit", locals:{item: @organization}}
-		end
+		show_item @organization
 	end
 
 	def update
-		updateANDrender_catalog_item Catalog::Organization.find(params[:id]), organization_params
+		organization = Catalog::Organization.find(params[:id])
+		if organization.update_attributes(organization_params)
+			flash.now[:notice] = "Организация #{organization.fullname} обновлена" 
+			perform_after_save organization
+		else
+			flash.now[:notice] = "Произошла ошибка при обновлении Организации"
+			show_errors_on organization	
+		end
 	end
 
 	def search

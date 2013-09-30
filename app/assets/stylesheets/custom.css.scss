@@ -1,49 +1,27 @@
 @import "bootstrap";
+@import "font-awesome";
 
 html {
 	height: 100%
 }
 body {
-	background: url(background-light.png) left top repeat-x #e3e3e3;
+	background-color: rgba(184, 184, 184, 0.3) ;
+	background-image: linear-gradient(white 2px, transparent 2px),
+	linear-gradient(90deg, white 2px, transparent 2px),
+	linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
+	linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+	background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
+	background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
 	height: 100%;
 }
 
+/* TOPOGRAPHY */
+h5 {
+	font-weight: normal;
+}
+
 .row-fixed {
-	padding-top: 80px;
-}
-
-.alert {
-	margin-bottom: 0px;
-}
-
-/* typography */
-
-h1, h2, h3, h4, h5, h6 {
-	line-height: 1;
-}
-
-h1 {
-	font-size: 3em;
-	letter-spacing: -2px;
-	margin-bottom: 30px;
-	text-align: center;
-}
-
-h2 {
-	font-size: 1.7em;
-	letter-spacing: -1px;
-	text-align: left;
-	font-weight: normal;
-	color: #999;
-}
-h3 {
-	text-align: left;
-	font-weight: normal;
-	color: #999;
-}
-p {
-	font-size: 1.1em;
-	line-height: 1.5em;
+	padding-top: 70px;
 }
 
 .container-signin {
@@ -66,21 +44,21 @@ p {
 	border-right: 1px solid #e5e5e5;
 }
 
-.item {
-	padding-top: 2px;
-	padding-bottom: 2px;
-	padding-left: 5px;
-	margin-bottom: 5px;
-	border: 1px solid #e5e5e5;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-	box-shadow: 0 1px 2px rgba(0,0,0,.05);
+.push {
+	height: 40px;
 }
-.item:hover {
-	background-color: #fff;
+
+.alert { margin-bottom: 0px }
+
+#flash_notice { 
+	display: none;
+	&:hover { cursor: wait }
+}
+
+
+#form_errors {
+	display: none;
+	&:hover { cursor: wait }
 }
 
 #error_explanation {
@@ -105,23 +83,95 @@ p {
 	border-radius: 5px;
 }
 
+ul.media-list {
+	margin: 2px 10px 10px 10px;
+	li.media {
+		padding-top: 5px;
+		padding-left: 5px;
+		height: 40px;
+		background: #eeeeee; /* Old browsers */
+		background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top, #eeeeee 0%,#cccccc 100%); /* IE10+ */
+		background: linear-gradient(to bottom, #eeeeee 0%,#cccccc 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+		border-top: 1px solid #fff;
+		border-left: 1px solid #fff;
+		border-radius: 5px;
+		-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+		-moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+		box-shadow: 0 1px 2px rgba(0,0,0,.05);
+		-webkit-transition: all 0.5s ease;
+		-moz-transition: all 0.5s ease;
+		transition: all 0.5s ease;
+		&:hover {
+			-webkit-transform: translateX(4px);
+			-moz-transform: translateX(4px);
+			-o-transform: translateX(4px);
+			transform: translateX(4px);
+
+			-webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+			-moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+			box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+			-webkit-box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+			-moz-box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+			box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;     
+		}
+		.media-body {
+			padding-right: 5px;
+			.media-heading {
+				.date {margin-right: 10px}
+			}
+		}
+	}
+}
+
+.modal {
+    /* new custom width */
+    width: 700px;
+    /* must be half of the width, minus scrollbar on the left (30px) */
+    margin-left: -380px;
+    .well {
+    	margin-top: 10px;
+    	margin-bottom: 10px;
+    }
+}
+
+.barcode {
+	form {
+		.control-group {
+			margin-bottom: 0px;
+			#request_barcode {
+				margin-bottom: 10px;
+			}
+		}
+		margin-bottom: 0px;
+	}
+}
+
+aside {
+	padding-right: 10px;
+	margin-right: 250px;
+	width: 220px;
+	border-right: 1px solid #e5e5e5;
+}
+article {
+	float: right;
+	padding-top: 5px;
+	.alert {
+		margin-bottom: 5px;
+	}
+}
+
 .modal-body {
 	max-height: 300px;
+	margin-top: 0px;
+	padding-top: 0px;
 }
 
 form.form-inline div.control-group { display: inline-block; }
 form.form-inline div.control-group div.controls { display: inline-block; }
 
-th {
-	color: #ffffff;
-	font-weight: normal;
-	text-decoration: none;
-	background-color: #0081c2;
-	background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
-	background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
-	background-image: -o-linear-gradient(top, #0088cc, #0077b3);
-	background-image: linear-gradient(to bottom, #0088cc, #0077b3);
-	background-repeat: repeat-x;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
-}
+

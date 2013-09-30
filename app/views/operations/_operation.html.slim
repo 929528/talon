@@ -1,11 +1,5 @@
-.alert class="alert-#{operation.talon.new_record? ? "success" : "error"}"
-	a.close data-dismiss="alert" &#215;
-	.operation id="#{operation.talon.barcode}"
-		= "#{operation.talon.amount.value} #{operation.talon.barcode} #{operation.talon.product.fullname} #{operation.action.name}"
-		= simple_fields_for :document do |d|
-			= d.simple_fields_for "operation[#{operation.id}]", operation do |o|
-				= o.simple_fields_for :action, operation.action do |a|
-					= a.input_field :id, label: false, as: :hidden
-				= o.input_field :id, label: false, as: :hidden
-				= o.simple_fields_for :talon, operation.talon do |t|
-					= t.input_field :barcode, label: false, as: :hidden
+.operation data-barcode="#{operation.talon.barcode}"
+	small.alert class="alert-success" = "Экшн: #{operation.action.name} Талон: #{operation.talon.barcode} Состояние: #{operation.talon.state.name}"  
+	= simple_fields_for "document[operations_attributes][#{operation.talon.barcode}]", operation do |o|
+		= o.input_field :action_id, label: false, as: :hidden
+		= o.input_field :talon_barcode, label: false, as: :hidden

@@ -1,4 +1,10 @@
-$("#form_errors").hide(300);
-$("#list").append("<%= escape_javascript( render item )  %>");
-$("#flash_notice").html("<%= escape_javascript( render(partial: "shared/flashNotice"))  %>");
+$("#form_errors").slideUp(300);
+<% if params[:action] == "update" %>
+	$("#list > <%=j "#item_#{item.id}" %>").replaceWith("<%=j render item %>");
+<% else %>
+	$("#list").append("<%=j render item %>");
+<% end %>
 $("#modal-window").modal('hide');
+var notice = $("#flash_notice");
+notice.html("<%=j render partial: "shared/flashNotice" %>");
+show_div(notice);

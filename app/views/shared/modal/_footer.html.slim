@@ -1,4 +1,5 @@
 .modal-footer
 	a class="btn" data-state="close" Закрыть
 	a class="btn btn-info" data-state="save" Сохранить
-	a class="btn btn-success" data-state="write" Провести
+	- unless catalog?(item)
+		a class="btn btn-success" data-state="write" Провести

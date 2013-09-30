@@ -1,0 +1,18 @@
+= simple_form_for setup_document(@document), remote: true do |d|	
+	/.well.well-small 
+		= d.input :customer_name, label: "Контрагент", input_html: {data: {provide: "typeahead", source: get_customers_name}}
+		= d.input :contract_id, label: "Договор", as: :select, collection: get_contracts(@document.customer)
+	article
+		= d.input_field :action_id, as: :hidden
+		= d.input_field :new_document_state_name, as: :hidden
+		#operations
+			= render @document.operations
+aside
+	- if @document.new_record?
+		.barcode
+			= simple_form_for :request, url: request_operation_path(document_action: @document.action.name), html: {id: "request"}, method: :get, remote: true do |f|
+				= f.input :barcode, label: false, placeholder: "Введите талон...."
+	.well.well-small
+		| ИТОГО по видам топлива
+	.well.well-small
+		| Общее ОТОГО

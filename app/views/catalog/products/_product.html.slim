@@ -1,6 +1,8 @@
-.item
-	.row
-		.span12
-			= product.fullname
+li.media id="item_#{product.id}"
+	i.pull-left class="#{model_icon product }"
+	.media-body
+		h5.media-heading 
+			= "#{model_name product } №: #{product.id} Полное наименование: #{product.fullname}"
 			.pull-right
-				= link_to(content_tag(:i,"",class: "icon-wrench")+ "", edit_catalog_product_path(product), class: "btn btn-small", rel: "tooltip", title: "Редактировать", data: {target: "#modal-window", toggle: "modal"}, remote: true)
+				small.date = product.created_at.strftime "Создан: %d/%m/%Y"
+				= link_to(content_tag(:i,"",class: "icon-wrench")+ "",edit_catalog_product_path(product), class: "btn btn-small", rel: "tooltip", title: "Редактировать", data: {target: "#modal-window", toggle: "modal"}, remote: true)

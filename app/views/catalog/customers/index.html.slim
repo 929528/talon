@@ -3,7 +3,6 @@
 = content_for :control_panel do
 	== render "shared/control_panel", panel: {btn: {add: {title: "Добавить контрагента", action: new_catalog_customer_path}}, filter: {action: search_catalog_customers_path, items: @customers}}
 
-#list
+ul.media-list.well id="list" 
 	== render @customers
-
-= will_paginate class: "pagination pagination-centered"
+	= will_paginate class: "pagination pagination-centered"

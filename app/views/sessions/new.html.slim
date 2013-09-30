@@ -1,7 +1,7 @@
 = provide(:title, "Авторизация")
 
 .container
-	.container-signin
+	.container-signin.well
 		.row
 			.span5
 				= simple_form_for :session, url: sessions_path, html: {class: "form-signin"} do |f|

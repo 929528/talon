@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130915130342) do
+ActiveRecord::Schema.define(version: 20130929214137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 20130915130342) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "catalog_contracts", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "customer_id"
+  end
+
+  add_index "catalog_contracts", ["customer_id"], name: "index_catalog_contracts_on_customer_id", using: :btree
 
   create_table "catalog_customers", force: true do |t|
     t.string   "name"
@@ -96,25 +105,21 @@ ActiveRecord::Schema.define(version: 20130915130342) do
   add_index "catalog_users", ["name"], name: "index_catalog_users_on_name", using: :btree
   add_index "catalog_users", ["role_id"], name: "index_catalog_users_on_role_id", using: :btree
 
-  create_table "document_states", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "documents", force: true do |t|
-    t.integer  "customer_id"
     t.integer  "organization_id"
     t.integer  "action_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "DocumentState_id"
+    t.integer  "state_id"
+    t.integer  "customer_id"
+    t.integer  "contract_id"
   end
 
-  add_index "documents", ["DocumentState_id"], name: "index_documents_on_DocumentState_id", using: :btree
   add_index "documents", ["action_id"], name: "index_documents_on_action_id", using: :btree
+  add_index "documents", ["contract_id"], name: "index_documents_on_contract_id", using: :btree
   add_index "documents", ["customer_id"], name: "index_documents_on_customer_id", using: :btree
   add_index "documents", ["organization_id"], name: "index_documents_on_organization_id", using: :btree
+  add_index "documents", ["state_id"], name: "index_documents_on_state_id", using: :btree
 
   create_table "operations", force: true do |t|
     t.integer  "document_id"
@@ -127,5 +132,11 @@ ActiveRecord::Schema.define(version: 20130915130342) do
   add_index "operations", ["action_id"], name: "index_operations_on_action_id", using: :btree
   add_index "operations", ["document_id"], name: "index_operations_on_document_id", using: :btree
   add_index "operations", ["talon_id"], name: "index_operations_on_talon_id", using: :btree
+
+  create_table "states", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

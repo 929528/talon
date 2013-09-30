@@ -1,61 +1,92 @@
 $ ->
     # Autocomplete add
-	$('select[rel="autocomplete"]').each ->
-        option = []     
-        $(this).find('option').each ->     
-            option.push $(this).text()
-        
-        input = $('<input>')
-        input.attr('type','text')
-        input.attr('name', $(this).attr('name') )
-        input.attr('id', $(this).attr('id') )  
-        input.attr('class', $(this).attr('class') )
-        input.attr('placeholder', $(this).attr('placeholder') )
-        input.attr('data-provide', 'typeahead' )
-        input.attr('autocomplete', 'off' )
-        input.val($(this).attr('data_default'))
-        $(this).replaceWith(input)
-        
-        $(input).typeahead
-            source: option,
-            updater: (item) ->
-                $(input).val(item)
-                $('.navbar form').submit()
-                return item
 
-    # Tooltip add        
-    $('[rel="tooltip"]').each ->
-        $(this).tooltip()
+    # Обработчик модального окна
+    modal = $('#modal-window') 
+    modal.on 'shown', () ->
+        # autocomplete $('select[rel="autocomplete"]')
+        options = $('#modal').data("type")
+        _new = (options.new == "true")
+        switch options.type
+            when "document" then _document = true
+            when "catalog"
+                _catalog = true
+                switch options.view
+                    when "user" then _user = true
+                    when "organization" then _organization = true
+                    when "customer" then _customer = true
+                    when "product" then _product = true
+        if _document && _new
+            # Отправка штрихкода или генерация ошибки
+            $('#request').submit (e) ->
+                barcode = $('#request_barcode').val()
+                show_error "Талон #{barcode} существует в списке" if talon_exists(barcode)
+            #---------------------------
+        if _document
+            object = $('#document_catalog_customer_name')
+            items = object.data('source')
+            object.typeahead
+                source: items,
+                updater: (item) ->
+                    $.ajax '/request_contracts',
+                        data:
+                            {customer: {name: item}}
+                    return item
 
-    # Submit modal form
-    $('#modal-window').on 'shown', () ->
-        modal = $(this)
-        $('.modal-footer > .btn').each ->
-            $(this).click () ->
-                state = $(this).data('state')
-                if  state == "close"
-                    modal.modal('hide')
-                else
-                    $('.modal-body > .form > form #document_document_state_name').val(state)
+        # Вешаем обработчики на кнопки
+        $('.modal-footer > .btn').click ->
+            state = $(this).data('state')
+            if  state == "close"
+                modal.modal('hide')
+            else
+                $('.modal-body > .simple_form #document_new_document_state_name').val(state)
+                $('.modal-body > .simple_form').submit()
 
-                    $('.modal-body > .form > form').submit()
+        #---------------------------
+    #---------------------------
  
-    #Validate exists DOM.id
-    submit_barcode_form = () ->
-        barcode = $('#request_barcode').val()
-        operations = $('.operation')
-        for el in operations
-            if el.id == barcode
-                error = "Талон существует в списке"
-        unless error 
-            ('#request').submit()
-        else
-            show_error(error)
-            $('#request_barcode').val('')
+    #   Вспомогательные функции
+# autocomplete = (items) ->
+#     items.each ->
+#         option = []     
+#         $(this).find('option').each ->     
+#             option.push $(this).text()
+#         input = $('<input>')
+#         input.attr('type','text')
+#         input.attr('name', $(this).attr('name') )
+#         input.attr('id', $(this).attr('id') )  
+#         input.attr('class', $(this).attr('class') )
+#         input.attr('placeholder', $(this).attr('placeholder') )
+#         input.attr('data-provide', 'typeahead' )
+#         input.attr('autocomplete', 'off' )
+#         input.val($(this).attr('data_default'))
+#         $(this).replaceWith(input)
+#         $(input).typeahead
+#             source: option
 
-    show_error = (error) ->
-        $("#form_errors").html('<div class="alert alert-error">'+error+'</div>')
-        $("#form_errors").show(300).delay(1000).hide(300)
+talon_exists = (request_barcode) ->
+    talons = []
+    $('#operations  .operation').each ->
+        barcode = $(this).data('barcode').toString()
+        talons.push({'barcode': barcode})
+    for talon in talons 
+        if talon['barcode'] == request_barcode
+            return true
+    return false
 
-    # Add to window functions
-    window.submit_barcode_form = submit_barcode_form
+show_error = (error) ->
+    div = $("#form_errors")
+    $('#request_barcode').val('')
+    div.html('<div class="alert alert-error">'+error+'</div>')
+    show_div div
+    return false
+
+show_div = (div) ->
+    div.slideDown 300, ->
+        interval = setInterval ->
+            unless div.css('cursor')=='wait'
+                div.slideUp 300
+                clearInterval(interval)
+        ,2000
+#---------------------------
+window.show_div = show_div

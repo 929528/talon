@@ -1,0 +1,7 @@
+li.media id="item_#{catalog.id}"
+	.media-body
+		i.pull-left class="{document_state_icon(document)}"
+		= link_to(content_tag(:i,"",class: "icon-gear"),catalog, class: "btn pull-right", rel: "tooltip", title: "Редактировать", data: {target: "#modal-window", toggle: "modal"}, remote: true)
+		h5.media-heading
+			= "Справочник №: #{catalog.id}"
+			small.pull-right.date = "Создан: #{catalog.created_at}"

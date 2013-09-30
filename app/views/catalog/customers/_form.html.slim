@@ -1,0 +1,6 @@
+.form
+	= simple_form_for @customer, as: :customer, html: {class: "form-horizontal"}, remote: true do |f|
+		= f.input :name, label: "Наименование"
+		= f.input :fullname, label: "Полное наименование"
+		= f.simple_fields_for :contracts do |co|
+			= co.input :name, label: "Договор"

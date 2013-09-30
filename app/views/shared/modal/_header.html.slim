@@ -1,6 +1,4 @@
 .modal-header
 	button.close type="button" data-dismiss="modal" aria-hidden="true" x
-	- if item
-		h4.muted = "Редактировать: #{item}"	
-	- else
-		h4.muted Добавить новый элемент
+	h4.muted = "#{modal_title(item)}"
+#form_errors

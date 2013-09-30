@@ -1,6 +1,8 @@
-.item
-	.row
-		.span12
-			= user.fullname
+li.media id="item_#{user.id}"
+	i.pull-left class="#{model_icon user }"
+	.media-body
+		h5.media-heading 
+			= "#{model_name user } №: #{user.id} Полное наименование: #{user.fullname}"
 			.pull-right
-				= link_to(content_tag(:i,"",class: "icon-wrench")+ "", edit_catalog_user_path(user), class: "btn btn-small", rel: "tooltip", title: "Редактировать", data: {target: "#modal-window", toggle: "modal"}, remote: true)
+				small.date = user.created_at.strftime "Создан: %d/%m/%Y"
+				= link_to(content_tag(:i,"",class: "icon-wrench")+ "",edit_catalog_user_path(user), class: "btn btn-small", rel: "tooltip", title: "Редактировать", data: {target: "#modal-window", toggle: "modal"}, remote: true)

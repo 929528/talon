@@ -8,12 +8,16 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'nested_form'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
+gem 'font-awesome-rails'
 
 gem "slim"
 gem "slim-rails", :require => false
 
 group :development, :test do
     gem 'thin'
+    gem 'better_errors'
+    gem 'binding_of_caller'
+    gem 'meta_request'
 end
 
 gem 'sass-rails', '4.0.0'

@@ -1,31 +1,38 @@
-# encoding: utf-8
 class Catalog::ProductsController < ApplicationController
 
-	include CatalogHelper
-
 	def index
-		@products = Catalog::Product.paginate(page: params[:page], per_page: 10)
+		@products = Catalog::Product.paginate(page: params[:page], per_page: 8)
 	end
 
 	def new
 		@product = Catalog::Product.new
-		respond_to do |format|
-			format.js { render partial: "shared/js/item_new" }
-		end
+		show_item @product
 	end
 
 	def create
-		createANDrender_catalog_item Catalog::Product.new(product_params)
+		product = Catalog::Product.new(product_params)
+		if product.save
+			flash.now[:notice] = "Продукт #{product.fullname} создан" 
+			perform_after_save product
+		else
+			flash.now[:notice] = "Произошла ошибка при создании продукта"
+			show_errors_on product
+		end
 	end
 
 	def edit
 		@product = Catalog::Product.find(params[:id])
-		respond_to do |format|
-			format.js {render partial: "shared/js/item_edit", locals:{item: @product}}
-		end
+		show_item @product
 	end
 	def update
-		updateANDrender_catalog_item Catalog::Product.find(params[:id]), product_params
+		product = Catalog::Product.find(params[:id])
+		if product.update_attributes(product_params)
+			flash.now[:notice] = "Продукт #{product.fullname} обновлен" 
+			perform_after_save product
+		else
+			flash.now[:notice] = "Произошла ошибка при обновлении продукта"
+			show_errors_on product
+		end
 	end
 
 	def search

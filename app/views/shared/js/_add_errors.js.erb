@@ -1,3 +1,4 @@
-$("#form_errors").html("<%= escape_javascript(render partial: ("shared/error_messages"), locals:{name: item})%>");
-$('#request_barcode').val('')
-$("#form_errors").show(300).delay(2000).hide(300);
+var div = $("#form_errors");
+div.html("<%=j render partial: "shared/error_messages", locals:{name: item} %>");
+$('#request_barcode').val('');
+show_div(div);
