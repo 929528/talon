@@ -1,9 +1,21 @@
 $ ->
+    $.fn.set_autocomplete = ->
+        path = this.data('path')
+        this.typeahead
+            source: this.data('source'),
+            updater: (item) ->
+                $.ajax path,
+                    data:
+                        {item: {name: item}}
+                return item
+
     # Autocomplete add
 
     # Обработчик модального окна
     modal = $('#modal-window') 
     modal.on 'shown', () ->
+        $('input[data-provide="typeahead"]').each ->
+            $(this).set_autocomplete()
         # autocomplete $('select[rel="autocomplete"]')
         options = $('#modal').data("type")
         _new = (options.new == "true")
@@ -23,7 +35,7 @@ $ ->
                 show_error "Талон #{barcode} существует в списке" if talon_exists(barcode)
             #---------------------------
         if _document
-            object = $('#document_catalog_customer_name')
+            object = $('#document_customer_name')
             items = object.data('source')
             object.typeahead
                 source: items,
@@ -45,24 +57,8 @@ $ ->
         #---------------------------
     #---------------------------
  
-    #   Вспомогательные функции
-# autocomplete = (items) ->
-#     items.each ->
-#         option = []     
-#         $(this).find('option').each ->     
-#             option.push $(this).text()
-#         input = $('<input>')
-#         input.attr('type','text')
-#         input.attr('name', $(this).attr('name') )
-#         input.attr('id', $(this).attr('id') )  
-#         input.attr('class', $(this).attr('class') )
-#         input.attr('placeholder', $(this).attr('placeholder') )
-#         input.attr('data-provide', 'typeahead' )
-#         input.attr('autocomplete', 'off' )
-#         input.val($(this).attr('data_default'))
-#         $(this).replaceWith(input)
-#         $(input).typeahead
-#             source: option
+test_item = (item) ->
+    alert item
 
 talon_exists = (request_barcode) ->
     talons = []
@@ -88,5 +84,9 @@ show_div = (div) ->
                 div.slideUp 300
                 clearInterval(interval)
         ,2000
+remove_parent = (item) ->
+    $(item).parent().remove()
 #---------------------------
 window.show_div = show_div
+window.remove_parent = remove_parent
+window.test_item = test_item

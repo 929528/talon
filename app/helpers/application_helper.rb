@@ -12,12 +12,11 @@ module ApplicationHelper
 		Time.now.to_i
 	end
 
-	def get_customers_name
+	def get_customer_names
 		Catalog::Customer.uniq.pluck(:name)
 	end
-
-	def get_contracts customer
-		Catalog::Contract.where("customer_id=?", customer.id)
+	def get_organization_names
+		Catalog::Organization.uniq.pluck(:name)
 	end
 
 	def modal_type(item)
@@ -36,12 +35,6 @@ module ApplicationHelper
 		when "edit" then "Редакировать: #{model_name item} № #{item.id}"
 		when "show" then "Просмотр: #{model_name item}"
 		end
-	end
-
-	def setup_document(document)
-		document.customer ||= document.build_customer
-		document.contract ||= document.build_contract
-		return document
 	end
 
 	def catalog?(item)

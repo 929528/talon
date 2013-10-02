@@ -1,0 +1,4 @@
+= simple_fields_for "customer[contracts_attributes][#{item.new_record? ? get_uniq_id : item.id}]", item do |f|
+	= f.input_field :id, as: :hidden
+	= f.input :name, label: "Наименование"
+	= f.input :default, label: false, inline_label: "По умолчанию"

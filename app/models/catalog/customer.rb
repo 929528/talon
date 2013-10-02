@@ -1,6 +1,6 @@
 class Catalog::Customer < ActiveRecord::Base
-	has_many :documents, inverse_of: :customer
 	has_many :contracts, inverse_of: :customer, dependent: :destroy
+	has_many :documents, through: :contracts
 
 	validates :name, presence: true, uniqueness: true
 	validates :contracts, presence: true

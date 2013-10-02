@@ -1,0 +1,13 @@
+var source = $('#contract_id');
+source.empty();
+<%- @contracts.each do |contract|%>
+source.append($('<option>', {
+	<%- if contract.default %>
+	selected: "selected",
+	<%-end %>
+	value: "<%= contract.id %>",
+	text: "<%= contract.name %>"
+}))
+<%- end %>
+
+

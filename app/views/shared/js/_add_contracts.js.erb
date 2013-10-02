@@ -1,6 +1,0 @@
-var object_content = ("<%=j render partial: "catalog/customers/contracts/nav_content",locals:{contract: item, index: id} %>");
-var object_tab = ("<%=j render partial: "catalog/customers/contracts/nav_tab", locals:{contract: item, index: id}  %>");
-$('#contract_tab > li:last').before(object_tab);
-$('#contract_content').append(object_content);
-
-$('#contract').html

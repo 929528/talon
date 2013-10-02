@@ -1,23 +1,30 @@
 Accvouchers::Application.routes.draw do
 
   namespace :catalog do
-    resources :users, :products, :organizations, :contracts do
+    resources :users, :products, :contracts do
       collection do
         get 'search'
+      end
+    end
+    resources :organizations do
+      collection do
+        get 'search'
+        get 'new_department'
+        get 'get_departments'
       end
     end
     resources :customers do
       collection do
         get 'search'
+        get 'new_contract'
+        get 'get_contracts'
       end
     end
   end
 
   resources :documents
 
-  match '/request_contracts' => 'catalog/customers#get_contracts', via: :get
   match '/request_operation' => 'documents#operation_new', via: :get
-
   resources :sessions, only: [:new, :create, :destroy]
 
   match '/signin' => 'sessions#new', via: :get

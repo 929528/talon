@@ -10,6 +10,8 @@ class Catalog::UsersController < ApplicationController
 
 	def new
 		@user = Catalog::User.new
+		@user.build_department
+		@user.department.build_organization
 		show_item @user
 	end
 
@@ -47,6 +49,6 @@ class Catalog::UsersController < ApplicationController
 	private
 
 	def user_params
-		params.require(:user).permit(:name, :fullname, :email, :password, :password_confirmation)
+		params.require(:user).permit(:name, :fullname, :email, :password, :password_confirmation, :department_id)
 	end
 end

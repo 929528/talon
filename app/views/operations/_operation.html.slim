@@ -1,5 +1,7 @@
-.operation data-barcode="#{operation.talon.barcode}"
-	small.alert class="alert-success" = "Экшн: #{operation.action.name} Талон: #{operation.talon.barcode} Состояние: #{operation.talon.state.name}"  
+.operation.alert.alert-success data-barcode="#{operation.talon.barcode}"
+	- if operation.new_record?
+		i class="close icon-remove-sign" onclick="remove_parent(this)"
+	== render operation.talon  
 	= simple_fields_for "document[operations_attributes][#{operation.talon.barcode}]", operation do |o|
 		= o.input_field :action_id, label: false, as: :hidden
 		= o.input_field :talon_barcode, label: false, as: :hidden

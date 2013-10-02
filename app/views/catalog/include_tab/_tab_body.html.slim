@@ -1,0 +1,2 @@
+.tab-pane class="#{item_counter == 0 ? "active" : ""}" id="include_tab#{item_counter}"
+	== render "catalog/#{item.class.name.split("::").last.downcase}s/form", item: item

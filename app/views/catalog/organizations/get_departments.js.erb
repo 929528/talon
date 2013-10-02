@@ -1,0 +1,8 @@
+var source = $('#department_id');
+source.empty();
+<%- @departments.each do |department|%>
+source.append($('<option>', {
+	value: "<%= department.id %>",
+	text: "<%= department.name %>"
+}))
+<%- end %>

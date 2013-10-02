@@ -1,5 +1,7 @@
 class Catalog::User < ActiveRecord::Base
 	belongs_to :role
+	belongs_to :department
+	has_one :organization, through: :department
 
 	has_secure_password
 
@@ -13,6 +15,11 @@ class Catalog::User < ActiveRecord::Base
 	uniqueness: { case_sensitive: false }
 	validates :password, presence: true, length: {minimum: 6, maximum: 15}
 	validates :password_confirmation, presence: true
+	validates_presence_of :department
+
+	def organization_name
+		self.department.organization.name
+	end
 
 	protected
 

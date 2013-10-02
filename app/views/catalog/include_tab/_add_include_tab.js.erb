@@ -1,0 +1,2 @@
+$('#include_tab ul li:last').before("<%=j render partial: "catalog/include_tab/tab_header", locals:{item: item, item_counter: get_uniq_id} %>");
+$('#include_tab .tab-content').append("<%=j render partial: "catalog/include_tab/tab_body", locals:{item: item, item_counter: get_uniq_id} %>");

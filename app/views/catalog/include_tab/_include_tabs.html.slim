@@ -1,0 +1,6 @@
+#include_tab.tabbable.tabs-below
+	ul.nav.nav-tabs
+		== render partial: "catalog/include_tab/tab_header", collection: items, as: :item
+		li = link_to "+", link_to_add, remote: true
+	.tab-content
+		== render partial: "catalog/include_tab/tab_body", collection: items, as: :item

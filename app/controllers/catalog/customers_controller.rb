@@ -9,12 +9,18 @@ class Catalog::CustomersController < ApplicationController
 		@customer.contracts.build(name: "Основной договор")
 		show_item @customer
 	end
+	def new_contract
+		contract = Catalog::Contract.new(name: "Новый договор")
+		respond_to do |format|
+			format.js { render partial: "catalog/include_tab/add_include_tab", locals: {item: contract} }
+		end
+	end
 
 	def get_contracts
-		customer = Catalog::Customer.find_by_name(params[:customer][:name])
-		contracts = customer.contracts.all.pluck(:name)
+		customer = Catalog::Customer.find_by_name(params[:item][:name])
+		@contracts = Catalog::Contract.where(customer: customer).load
 		respond_to do |format|
-			format.js { render partial: "shared/js/add_contracts", locals: {items: contracts} }
+			format.js 
 		end
 	end
 
@@ -55,6 +61,6 @@ class Catalog::CustomersController < ApplicationController
 		params.require(:customer).permit(
 			:name, 
 			:fullname,
-			contracts_attributes: [:id, :name])
+			contracts_attributes: [:id, :name, :default])
 	end
 end

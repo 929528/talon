@@ -5,5 +5,6 @@ li.media id="item_#{document.id}"
 			= "#{model_name document } №: #{document.id}"
 			.pull-right
 				small.date = document.created_at.strftime "Создан: %d/%m/%Y-%H:%M"
-				small.date = document.updated_at.strftime "Обновлен: %d/%m/%Y-%H:%M"
+				- if document.created_at != document.updated_at
+					small.date = document.updated_at.strftime "Обновлен: %d/%m/%Y-%H:%M"
 				= link_to(content_tag(:i,"",class: "icon-wrench")+ "",edit_document_path(document), class: "btn btn-small", rel: "tooltip", title: "Редактировать", data: {target: "#modal-window", toggle: "modal"}, remote: true)

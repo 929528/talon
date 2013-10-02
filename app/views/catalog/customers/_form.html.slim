@@ -1,6 +1,13 @@
-.form
-	= simple_form_for @customer, as: :customer, html: {class: "form-horizontal"}, remote: true do |f|
-		= f.input :name, label: "Наименование"
-		= f.input :fullname, label: "Полное наименование"
-		= f.simple_fields_for :contracts do |co|
-			= co.input :name, label: "Договор"
+= simple_form_for @customer, as: :customer, html: {class: "form-horizontal"}, remote: true do |f|
+	.tabbable.tabs-left
+		ul.nav.nav-tabs
+			li.active
+				a href="#customer_tab_main" data-toggle="tab" Основная вкладка
+			li
+				a href="#customer_tab_contracts" data-toggle="tab" Договора
+		.tab-content
+			#customer_tab_main.tab-pane.active
+				= f.input :name, label: "Наименование"
+				= f.input :fullname, label: "Полное наименование"
+			#customer_tab_contracts.tab-pane
+				== render partial: "catalog/include_tab/include_tabs", locals: {items: @customer.contracts, link_to_add: new_contract_catalog_customers_path }

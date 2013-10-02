@@ -7,6 +7,10 @@ class DocumentsController < ApplicationController
 
 	def new
 		@document = Document.new(action: Action.find(params[:type]))
+		@document.build_department
+		@document.department.build_organization
+		@document.build_contract
+		@document.contract.build_customer
 		show_item @document
 	end
 
@@ -56,12 +60,16 @@ class DocumentsController < ApplicationController
 
 	def document_params
 		params.require(:document).permit(
+			:department_id,
+			:contract_id,
 			:action_id,  
 			:new_document_state_name,
 			operations_attributes: [:action_id, :talon_barcode])
 	end
 	def update_document_params
 		params.require(:document).permit(
+			:department_id,
+			:contract_id,
 			:new_document_state_name)
 	end
 end

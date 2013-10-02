@@ -1,19 +1,18 @@
-#form_errors style="display: none"
-.form
-	= simple_form_for @user, as: :user, html: {class: "form-horizontal"}, remote: true do |f|
-		.tabbable
-			ul.nav.nav-tabs
-				li.active
-					a href="#tab1" data-toggle="tab" Наименование
-				li
-					a href="#tab2" data-toggle="tab" Права
-			.tab-content
-				#tab1.tab-pane.active
-					= f.input :name, label: "Наименование"
-					= f.input :fullname, label: "Полное наименование"
-					= f.input :email, label: "e-mail"
-					hr
-					= f.input :password, label: "Пароль"
-					= f.input :password_confirmation, label: "Подтверждение"
-				#tab2.tab-pane
-					| Доступ
+= simple_form_for @user, as: :user, html: {class: "form-horizontal"}, remote: true do |f|
+	.tabbable
+		ul.nav.nav-tabs
+			li.active
+				a href="#tab1" data-toggle="tab" Наименование
+			li
+				a href="#tab2" data-toggle="tab" Организация
+		.tab-content
+			#tab1.tab-pane.active
+				= f.input :name, label: "Наименование"
+				= f.input :fullname, label: "Полное наименование"
+				= f.input :email, label: "e-mail"
+				hr
+				= f.input :password, label: "Пароль"
+				= f.input :password_confirmation, label: "Подтверждение"
+			#tab2.tab-pane
+				= f.input :organization_name, label: "Организация", input_html: {data: {provide: "typeahead", source: get_organization_names, path: get_departments_catalog_organizations_path}}
+				= f.input :department_id, label: "Подразделение", as: :select, collection: @user.department.organization.departments, input_html: {id: "department_id"}

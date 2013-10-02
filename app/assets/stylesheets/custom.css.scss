@@ -86,6 +86,7 @@ h5 {
 ul.media-list {
 	margin: 2px 10px 10px 10px;
 	li.media {
+		margin-top: 5px;
 		padding-top: 5px;
 		padding-left: 5px;
 		height: 40px;
@@ -133,10 +134,23 @@ ul.media-list {
     width: 700px;
     /* must be half of the width, minus scrollbar on the left (30px) */
     margin-left: -380px;
+    .modal-body {
+    	max-height: 300px;
+    }
     .well {
     	margin-top: 10px;
     	margin-bottom: 10px;
     }
+}
+
+.talon{
+	.media{
+		margin-top: 0px;
+	}
+}
+.progress{
+	height: 10px;
+	margin-bottom: 0px;
 }
 
 .barcode {
@@ -154,21 +168,19 @@ ul.media-list {
 aside {
 	padding-right: 10px;
 	margin-right: 250px;
-	width: 220px;
+	width: 200px;
 	border-right: 1px solid #e5e5e5;
 }
 article {
 	float: right;
+	width: 450px;
 	padding-top: 5px;
-	.alert {
+	.operation {
+		margin-left: 5px;
 		margin-bottom: 5px;
+		min-width: 160px;
+		display: inline-block;
 	}
-}
-
-.modal-body {
-	max-height: 300px;
-	margin-top: 0px;
-	padding-top: 0px;
 }
 
 form.form-inline div.control-group { display: inline-block; }
