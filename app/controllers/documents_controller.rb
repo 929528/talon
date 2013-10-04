@@ -1,23 +1,19 @@
 class DocumentsController < ApplicationController
 
 	def index
-		@action = Action.find_by_name(params[:type])
-		@documents = Document.paginate(page: params[:page], per_page: 7)
+		@type = Type.find_by_name params[:type]
+		@documents = Document.where(type: @type).paginate(page: params[:page], per_page: 7)
 	end
 
 	def new
-		@document = Document.new(action: Action.find(params[:type]))
-		@document.build_department
-		@document.department.build_organization
-		@document.build_contract
-		@document.contract.build_customer
+		@document = Document.new
+		@document.type = Type.find(params[:type])
 		show_item @document
 	end
-
-	def operation_new
+	def new_operation
+		document_type = Type.find params[:document_type_id]
 		barcode = params[:request][:barcode]
-		action = Action.find_by_name(params[:document_action])
-		operation = Operation.new action: action, talon_barcode: barcode
+		operation = Operation.new document_type: document_type, talon_barcode: barcode
 		if operation.valid?
 			respond_to do |format|
 				format.js { render partial: "shared/js/add_operation", locals: {item: operation} }
@@ -31,6 +27,8 @@ class DocumentsController < ApplicationController
 
 	def create
 		document = Document.new(document_params)
+		document.department = current_user.department
+		document.user = current_user
 		if document.save
 			flash.now[:notice] = "Документ №: #{document.id} создан" 
 			perform_after_save document
@@ -47,6 +45,8 @@ class DocumentsController < ApplicationController
 
 	def update
 		document = Document.find(params[:id])
+		document.department = current_user.department
+		document.user = current_user
 		if document.update_attributes(update_document_params)
 			flash.now[:notice] = "Документ #{document} обновлен" 
 			perform_after_save document
@@ -60,16 +60,14 @@ class DocumentsController < ApplicationController
 
 	def document_params
 		params.require(:document).permit(
-			:department_id,
 			:contract_id,
-			:action_id,  
-			:new_document_state_name,
+			:type_id,  
+			:new_state,
 			operations_attributes: [:action_id, :talon_barcode])
 	end
 	def update_document_params
 		params.require(:document).permit(
-			:department_id,
 			:contract_id,
-			:new_document_state_name)
+			:new_state)
 	end
 end

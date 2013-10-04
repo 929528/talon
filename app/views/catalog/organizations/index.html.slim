@@ -3,6 +3,6 @@
 = content_for :control_panel do
 	== render "shared/control_panel", panel: {btn: {add: {title: "Добавить организацию", action: new_catalog_organization_path}}}
 
-ul.media-list.well id="list"
+ul.media-list id="list"
 	== render @organizations
 	= will_paginate class: "pagination pagination-centered"

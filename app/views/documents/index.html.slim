@@ -1,8 +1,8 @@
 = provide(:title, "Документы")
 
 = content_for :control_panel do
-	== render "shared/control_panel", panel: {btn: {add: {title: "Добавить документ", action: new_document_path(type: @action.id)}}}
+	== render "shared/control_panel", panel: {btn: {add: {title: "Добавить документ", action: new_document_path(type: @type.id)}}}
 
-ul.media-list.well id="list" 
-	== render @documents
+ul.media-list id="list" 
+	== render(@documents)
 	= will_paginate class: "pagination pagination-centered"

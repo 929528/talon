@@ -6,7 +6,6 @@ gem 'bootstrap-sass'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
-gem 'nested_form'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
 gem 'font-awesome-rails'
 

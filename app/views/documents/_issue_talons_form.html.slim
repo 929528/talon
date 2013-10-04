@@ -1,0 +1,19 @@
+= simple_form_for setup_document(@document), html: {class: "form-inline"},remote: true do |d|
+	.form_header
+		.row.customer
+			.span3
+				= d.input :customer_name, label: false, placeholder: "Введите контрагента", input_html: {data: {provide: "typeahead", source: get_customer_names, path: get_contracts_catalog_customers_path}}
+			.span3.contract
+				= d.input :contract_id,label: false, as: :select, collection: @document.contract.customer.contracts, input_html: {id: "contract_id"}
+	hr
+	article
+		= d.input_field :type_id, as: :hidden
+		= d.input_field :new_state, as: :hidden
+		#operations
+			= render @document.operations
+aside
+	- if @document.new_record?
+		.barcode
+			= simple_form_for :request, url: new_operation_documents_path(document_type_id: @document.type.id), html: {id: "request"}, method: :get, remote: true do |f|
+				= f.input :barcode, label: false, placeholder: "Введите талон....", input_html: {class: "input-block-level"}
+	.results.well

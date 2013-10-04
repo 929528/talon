@@ -43,24 +43,31 @@ module ApplicationHelper
 	def document?(item)
 		item.class.name == "Document"
 	end
+	def setup_document document
+		case document.type.name
+		when "issue_talons"
+			document.contract ||= document.build_contract if document.new_record?
+		end
+		return document
+	end
 	def model_icon(item)
 		if document? item
 			case item.state.name
 			when "write"
-				"icon-check icon-2x text-success"
+				"icon-check icon-2x"
 			when "save"
-				"icon-save icon-2x text-error"
+				"icon-save icon-2x"
 			end
 		elsif catalog? item
-			"icon-book icon-2x text-info"
+			"icon-book icon-2x"
 		end
 	end
 	def model_name(item)
 		if document? item
-			case item.action.name
-			when "issue"
+			case item.type.name
+			when "issue_talons"
 				"Реализация талонов"
-			when "repaid"
+			when "repaid_talons"
 				"Погашение талонов"
 			end
 		elsif catalog? item

@@ -1,4 +1,4 @@
-.operation.alert.alert-success data-barcode="#{operation.talon.barcode}"
+.operation data-barcode="#{operation.talon.barcode}"
 	- if operation.new_record?
 		i class="close icon-remove-sign" onclick="remove_parent(this)"
 	== render operation.talon  

@@ -22,9 +22,10 @@ Accvouchers::Application.routes.draw do
     end
   end
 
-  resources :documents
+  resources :documents do
+    get 'new_operation', on: :collection
+  end
 
-  match '/request_operation' => 'documents#operation_new', via: :get
   resources :sessions, only: [:new, :create, :destroy]
 
   match '/signin' => 'sessions#new', via: :get

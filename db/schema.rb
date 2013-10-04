@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131002120253) do
+ActiveRecord::Schema.define(version: 20131004155327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,25 +119,27 @@ ActiveRecord::Schema.define(version: 20131002120253) do
   add_index "catalog_users", ["role_id"], name: "index_catalog_users_on_role_id", using: :btree
 
   create_table "documents", force: true do |t|
-    t.integer  "action_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "state_id"
     t.integer  "contract_id"
     t.integer  "department_id"
+    t.integer  "type_id"
+    t.integer  "user_id"
   end
 
-  add_index "documents", ["action_id"], name: "index_documents_on_action_id", using: :btree
   add_index "documents", ["contract_id"], name: "index_documents_on_contract_id", using: :btree
   add_index "documents", ["department_id"], name: "index_documents_on_department_id", using: :btree
   add_index "documents", ["state_id"], name: "index_documents_on_state_id", using: :btree
+  add_index "documents", ["type_id"], name: "index_documents_on_type_id", using: :btree
+  add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
 
   create_table "operations", force: true do |t|
-    t.integer  "document_id"
     t.integer  "talon_id"
     t.integer  "action_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "document_id"
   end
 
   add_index "operations", ["action_id"], name: "index_operations_on_action_id", using: :btree
@@ -145,6 +147,12 @@ ActiveRecord::Schema.define(version: 20131002120253) do
   add_index "operations", ["talon_id"], name: "index_operations_on_talon_id", using: :btree
 
   create_table "states", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "types", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"

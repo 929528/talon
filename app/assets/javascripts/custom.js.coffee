@@ -16,7 +16,7 @@ $ ->
     modal.on 'shown', () ->
         $('input[data-provide="typeahead"]').each ->
             $(this).set_autocomplete()
-        # autocomplete $('select[rel="autocomplete"]')
+
         options = $('#modal').data("type")
         _new = (options.new == "true")
         switch options.type
@@ -51,15 +51,12 @@ $ ->
             if  state == "close"
                 modal.modal('hide')
             else
-                $('.modal-body > .simple_form #document_new_document_state_name').val(state)
+                $('.modal-body > .simple_form #document_new_state').val(state)
                 $('.modal-body > .simple_form').submit()
 
         #---------------------------
     #---------------------------
  
-test_item = (item) ->
-    alert item
-
 talon_exists = (request_barcode) ->
     talons = []
     $('#operations  .operation').each ->
@@ -89,4 +86,3 @@ remove_parent = (item) ->
 #---------------------------
 window.show_div = show_div
 window.remove_parent = remove_parent
-window.test_item = test_item
