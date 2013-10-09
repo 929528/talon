@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  talon_id: 
+  price: 9.99
+  document_id: 
+  document_type: Document
+
+two:
+  talon_id: 
+  price: 9.99
+  document_id: 
+  document_type: Document

@@ -2,7 +2,7 @@ li.media id="item_#{organization.id}"
 	i.pull-left class="#{model_icon organization }"
 	.media-body
 		h5.media-heading 
-			= "#{model_name organization } №: #{organization.id} Полное наименование: #{organization.fullname}"
+			= "№: #{organization.id} Полное наименование: #{organization.fullname}"
 			.pull-right
 				small.date = organization.created_at.strftime "Создан: %d/%m/%Y"
 				= link_to(content_tag(:i,"",class: "icon-wrench")+ "",edit_catalog_organization_path(organization), class: "btn btn-small", rel: "tooltip", title: "Редактировать", data: {target: "#modal-window", toggle: "modal"}, remote: true)

@@ -15,7 +15,7 @@ class Catalog::User < ActiveRecord::Base
 	uniqueness: { case_sensitive: false }
 	validates :password, presence: true, length: {minimum: 6, maximum: 15}
 	validates :password_confirmation, presence: true
-	validates_presence_of :department
+	# validates_presence_of :department
 
 	def organization_name
 		self.department.organization.name

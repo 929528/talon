@@ -1,53 +1,29 @@
-class Catalog::UsersController < ApplicationController
-
-	def index
-		@users = Catalog::User.paginate(page: params[:page], per_page: 8)
-	end
+class Catalog::UsersController < Catalog::CatalogController
+	before_filter :init_catalog
 
 	def show
-		@user = Catalog::User.find(params[:id])
+		@item = target.find(params[:id])
 	end
 
 	def new
-		@user = Catalog::User.new
-		@user.build_department
-		@user.department.build_organization
-		show_item @user
+		@item = target.new
+		@item.build_department
+		@item.department.build_organization
+		super @item
 	end
 
 	def create
-		user =  Catalog::User.new(user_params)
-		if user.save
-			flash.now[:notice] = "Пользователь #{user.fullname} создан" 
-			perform_after_save user
-		else
-			flash.now[:notice] = "Произошла ошибка при создании пользователя"
-			show_errors_on user
-		end
+		super user_params
 	end
-	def edit
-		@user = Catalog::User.find(params[:id])
-		show_item @user
-	end
-
 	def update
-		user =  Catalog::User.find(params[:id])
-		if user.update_attributes(user_params)
-			flash.now[:notice] = "Поьзователь #{user.fullname} обновлен" 
-			perform_after_save user
-		else
-			flash.now[:notice] = "Произошла ошибка при обновлении пользователя"
-			show_errors_on user
-		end
-	end
-
-	def search
-		users = Catalog::User.all
-		filter_items(users, params[:filter])
+		super user_params
 	end
 
 	private
 
+	def init_catalog
+		self.target = Catalog::User
+	end
 	def user_params
 		params.require(:user).permit(:name, :fullname, :email, :password, :password_confirmation, :department_id)
 	end

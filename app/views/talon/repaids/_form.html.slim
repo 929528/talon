@@ -1,0 +1,11 @@
+= simple_form_for @document, as: :document, html: {class: "form-inline"}, remote: true do |d|
+	article
+		= d.input_field :new_state, as: :hidden, id: "document_new_state_name"
+		#operations
+			= render @document.operations
+aside
+	- if @document.new_record?
+		.barcode
+			= simple_form_for :operation, url: new_operation_talon_repaids_path, html: {id: "request"}, method: :get, remote: true do |f|
+				= f.input :talon_barcode, label: false, placeholder: "Введите талон....", input_html: {class: "input-block-level"}
+	.results.well

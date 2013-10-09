@@ -1,4 +1,4 @@
-= simple_form_for @user, as: :user, html: {class: "form-horizontal"}, remote: true do |f|
+= simple_form_for @item, as: :user, html: {class: "form-horizontal"}, remote: true do |f|
 	.tabbable
 		ul.nav.nav-tabs
 			li.active
@@ -15,4 +15,4 @@
 				= f.input :password_confirmation, label: "Подтверждение"
 			#tab2.tab-pane
 				= f.input :organization_name, label: "Организация", input_html: {data: {provide: "typeahead", source: get_organization_names, path: get_departments_catalog_organizations_path}}
-				= f.input :department_id, label: "Подразделение", as: :select, collection: @user.department.organization.departments, input_html: {id: "department_id"}
+				= f.input :department_id, label: "Подразделение", as: :select, collection: @item.department.organization.departments, input_html: {id: "department_id"}

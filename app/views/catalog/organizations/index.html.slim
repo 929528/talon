@@ -4,5 +4,5 @@
 	== render "shared/control_panel", panel: {btn: {add: {title: "Добавить организацию", action: new_catalog_organization_path}}}
 
 ul.media-list id="list"
-	== render @organizations
-	= will_paginate class: "pagination pagination-centered"
+	== render @items
+	= will_paginate @items, class: "pagination pagination-centered"

@@ -19,37 +19,17 @@ module ApplicationHelper
 		Catalog::Organization.uniq.pluck(:name)
 	end
 
-	def modal_type(item)
-		a = Hash.new("")
-		type = item.class.name.split("::").first.downcase
-		view = item.class.name.split("::").last.downcase
-		a["type"] += type
-		a["new"] += item.new_record?.to_json
-		a["view"] += view
-		return a.to_json
-	end
-
-	def modal_title(item)
-		case params[:action]
-		when "new" then "Создать: #{model_name item}"
-		when "edit" then "Редакировать: #{model_name item} № #{item.id}"
-		when "show" then "Просмотр: #{model_name item}"
-		end
+	def modal_title item
+		"#{item} :: #{params[:action]}"
 	end
 
 	def catalog?(item)
 		item.class.name.split("::").first == "Catalog"
 	end
 	def document?(item)
-		item.class.name == "Document"
+		!catalog? item
 	end
-	def setup_document document
-		case document.type.name
-		when "issue_talons"
-			document.contract ||= document.build_contract if document.new_record?
-		end
-		return document
-	end
+
 	def model_icon(item)
 		if document? item
 			case item.state.name
@@ -60,46 +40,6 @@ module ApplicationHelper
 			end
 		elsif catalog? item
 			"icon-book icon-2x"
-		end
-	end
-	def model_name(item)
-		if document? item
-			case item.type.name
-			when "issue_talons"
-				"Реализация талонов"
-			when "repaid_talons"
-				"Погашение талонов"
-			end
-		elsif catalog? item
-			case item.class.name.split("::").last
-			when "Customer" then "Контрагент"
-			when "Organization" then "Организация"
-			when "Product" then "Продукт"
-			when "User" then "Пользователь"
-			end
-		end
-	end
-
-	def perform_after_save(item)
-		respond_to do |format|
-			format.js { render partial: "shared/js/submit_modal", locals: {item: item} }
-		end 
-	end
-	def show_errors_on(item)
-		respond_to do |format|
-			format.js { render partial: "shared/js/add_errors", locals: {item: item} }
-		end
-	end
-	def show_item(item)
-		respond_to do |format|
-			format.js { render partial: "shared/js/item", locals: {item: item} }
-		end
-	end
-	def filter_items(items, filter)
-		items = items.where("name = ?", params[:filter]) unless params[:filter].blank?
-		items = items.paginate(page: params[:page], per_page: 10)
-		respond_to do |format|
-			format.js {render partial: "shared/js/item_search", locals:{items: items}}
 		end
 	end
 end

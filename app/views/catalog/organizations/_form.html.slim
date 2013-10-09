@@ -1,4 +1,4 @@
-= simple_form_for @organization, as: :organization, html: {class: "form-horizontal"}, remote: true do |f|
+= simple_form_for @item, as: :organization, html: {class: "form-horizontal"}, remote: true do |f|
 	.tabbable.tabs-left
 		ul.nav.nav-tabs
 			li.active
@@ -10,4 +10,4 @@
 				= f.input :name, label: "Наименование"
 				= f.input :fullname, label: "Полное наименование"
 			#organization_tab_departments.tab-pane
-				== render partial: "catalog/include_tab/include_tabs", locals: {items: @organization.departments, link_to_add: new_department_catalog_organizations_path }
+				== render partial: "catalog/include_tab/include_tabs", locals: {items: @item.departments, link_to_add: new_department_catalog_organizations_path }

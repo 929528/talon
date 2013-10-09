@@ -17,33 +17,20 @@ $ ->
         $('input[data-provide="typeahead"]').each ->
             $(this).set_autocomplete()
 
-        options = $('#modal').data("type")
-        _new = (options.new == "true")
-        switch options.type
-            when "document" then _document = true
-            when "catalog"
-                _catalog = true
-                switch options.view
-                    when "user" then _user = true
-                    when "organization" then _organization = true
-                    when "customer" then _customer = true
-                    when "product" then _product = true
-        if _document && _new
-            # Отправка штрихкода или генерация ошибки
-            $('#request').submit (e) ->
-                barcode = $('#request_barcode').val()
-                show_error "Талон #{barcode} существует в списке" if talon_exists(barcode)
-            #---------------------------
-        if _document
-            object = $('#document_customer_name')
-            items = object.data('source')
-            object.typeahead
-                source: items,
-                updater: (item) ->
-                    $.ajax '/request_contracts',
-                        data:
-                            {customer: {name: item}}
-                    return item
+        # Отправка штрихкода или генерация ошибки
+        $('#request').submit (e) ->
+            barcode = $('#operation_talon_barcode').val()
+            show_error "Талон #{barcode} существует в списке" if talon_exists(barcode)
+        #---------------------------
+        object = $('#document_customer_name')
+        items = object.data('source')
+        object.typeahead
+            source: items,
+            updater: (item) ->
+                $.ajax '/request_contracts',
+                    data:
+                        {customer: {name: item}}
+                return item
 
         # Вешаем обработчики на кнопки
         $('.modal-footer > .btn').click ->
@@ -51,7 +38,7 @@ $ ->
             if  state == "close"
                 modal.modal('hide')
             else
-                $('.modal-body > .simple_form #document_new_state').val(state)
+                $('.modal-body > .simple_form #document_new_state_name').val(state)
                 $('.modal-body > .simple_form').submit()
 
         #---------------------------
@@ -69,7 +56,7 @@ talon_exists = (request_barcode) ->
 
 show_error = (error) ->
     div = $("#form_errors")
-    $('#request_barcode').val('')
+    $('#operation_talon_barcode').val('')
     div.html('<div class="alert alert-error">'+error+'</div>')
     show_div div
     return false

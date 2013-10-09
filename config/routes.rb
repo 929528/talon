@@ -2,29 +2,24 @@ Accvouchers::Application.routes.draw do
 
   namespace :catalog do
     resources :users, :products, :contracts do
-      collection do
-        get 'search'
-      end
+      get :search, on: :collection
     end
     resources :organizations do
-      collection do
-        get 'search'
-        get 'new_department'
-        get 'get_departments'
-      end
+      get :search, :new_department, :get_departments, on: :collection
     end
     resources :customers do
-      collection do
-        get 'search'
-        get 'new_contract'
-        get 'get_contracts'
-      end
+      get :search, :new_contract, :get_contracts, on: :collection
     end
   end
 
-  resources :documents do
-    get 'new_operation', on: :collection
-  end
+    namespace :talon do
+      resources :issues, :repaids, :exchanges do
+        get :new_operation, on: :collection 
+      end
+      resources :prices do
+        get :new_operation, on: :collection
+      end
+    end
 
   resources :sessions, only: [:new, :create, :destroy]
 

@@ -1,0 +1,12 @@
+li.media id="item_#{issue.id}"
+	i.pull-left class="#{model_icon issue}"
+	.media-body
+		h5.media-heading 
+			= "№: #{issue.id}"
+			.pull-right
+				small.date 
+					= issue.created_at.strftime "Создан: %d/%m/%Y-%H:%M"
+					- if issue.created_at != issue.updated_at
+						= issue.updated_at.strftime " Обновлен: %d/%m/%Y-%H:%M"
+				small.date  = "Автор: #{issue.user.name}"
+				= link_to(content_tag(:i,"",class: "icon-wrench")+ "",edit_talon_issue_path(issue), class: "btn btn-small", rel: "tooltip", title: "Редактировать", data: {target: "#modal-window", toggle: "modal"}, remote: true)

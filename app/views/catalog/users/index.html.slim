@@ -4,5 +4,5 @@
 	== render "shared/control_panel", panel: {btn: {add: {title: "Добавить пользователя", action: new_catalog_user_path}}}
 
 ul.media-list id="list" 
-	== render @users
-	= will_paginate class: "pagination pagination-centered"
+	== render @items
+	= will_paginate @items, class: "pagination pagination-centered"

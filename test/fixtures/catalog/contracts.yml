@@ -2,6 +2,12 @@
 
 one:
   name: MyString
+  fullname: MyString
+  default: false
+  customer_id: 
 
 two:
   name: MyString
+  fullname: MyString
+  default: false
+  customer_id: 

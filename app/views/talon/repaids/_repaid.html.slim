@@ -1,0 +1,12 @@
+li.media id="item_#{repaid.id}"
+	i.pull-left class="#{model_icon repaid}"
+	.media-body
+		h5.media-heading 
+			= "№: #{repaid.id}"
+			.pull-right
+				small.date 
+					= repaid.created_at.strftime "Создан: %d/%m/%Y-%H:%M"
+					- if repaid.created_at != repaid.updated_at
+						= repaid.updated_at.strftime " Обновлен: %d/%m/%Y-%H:%M"
+				small.date  = "Автор: #{repaid.user.name}"
+				= link_to(content_tag(:i,"",class: "icon-wrench")+ "",edit_talon_repaid_path(repaid), class: "btn btn-small", rel: "tooltip", title: "Редактировать", data: {target: "#modal-window", toggle: "modal"}, remote: true)

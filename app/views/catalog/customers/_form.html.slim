@@ -1,4 +1,4 @@
-= simple_form_for @customer, as: :customer, html: {class: "form-horizontal"}, remote: true do |f|
+= simple_form_for @item, as: :customer, html: {class: "form-horizontal"}, remote: true do |f|
 	.tabbable.tabs-left
 		ul.nav.nav-tabs
 			li.active
@@ -10,4 +10,4 @@
 				= f.input :name, label: "Наименование"
 				= f.input :fullname, label: "Полное наименование"
 			#customer_tab_contracts.tab-pane
-				== render partial: "catalog/include_tab/include_tabs", locals: {items: @customer.contracts, link_to_add: new_contract_catalog_customers_path }
+				== render partial: "catalog/include_tab/include_tabs", locals: {items: @item.contracts, link_to_add: new_contract_catalog_customers_path }

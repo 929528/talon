@@ -4,5 +4,5 @@
 	== render "shared/control_panel", panel: {btn: {add: {title: "Добавить контрагента", action: new_catalog_customer_path}}}
 
 ul.media-list id="list" 
-	== render @customers
-	= will_paginate class: "pagination pagination-centered"
+	== render @items
+	= will_paginate @items, class: "pagination pagination-centered"

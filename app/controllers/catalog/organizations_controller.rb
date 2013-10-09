@@ -1,13 +1,11 @@
-class Catalog::OrganizationsController < ApplicationController
+class Catalog::OrganizationsController < Catalog::CatalogController
 
-	def index
-		@organizations = Catalog::Organization.paginate(page: params[:page], per_page: 7)
-	end
+	before_filter :init_catalog
 
 	def new
-		@organization = Catalog::Organization.new
-		@organization.departments.build(name: "Основное подразделение") 
-		show_item @organization
+		@item = target.new
+		@item.departments.build(name: "Основное подразделение") 
+		super @item
 	end
 	def new_department
 		department = Catalog::Department.new(name: "Новое подразделение")
@@ -24,38 +22,18 @@ class Catalog::OrganizationsController < ApplicationController
 	end
 
 	def create
-		organization = Catalog::Organization.new(organization_params)
-		if organization.save
-			flash.now[:notice] = "Организация #{organization.fullname} создана" 
-			perform_after_save organization
-		else
-			flash.now[:notice] = "Произошла ошибка при создании организации"
-			show_errors_on organization
-		end
-	end
-
-	def edit
-		@organization = Catalog::Organization.find(params[:id])
-		show_item @organization
+		super organization_params
 	end
 
 	def update
-		organization = Catalog::Organization.find(params[:id])
-		if organization.update_attributes(organization_params)
-			flash.now[:notice] = "Организация #{organization.fullname} обновлена" 
-			perform_after_save organization
-		else
-			flash.now[:notice] = "Произошла ошибка при обновлении Организации"
-			show_errors_on organization	
-		end
-	end
-
-	def search
-		organizations = Catalog::Organization.all
-		filter_items organizations, params[:filter]
+		super organization_params
 	end
 
 	private
+
+	def init_catalog
+		self.target = Catalog::Organization
+	end
 
 	def organization_params
 		params.require(:organization).permit(:name, :fullname, 
