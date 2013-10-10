@@ -23,9 +23,8 @@ class Talon::DocumentController < ApplicationController
 			respond_to {|format| format.js { render partial: "shared/js/add_errors", locals: {item: document} }}
 		end
 	end
-	def new_operation
-		operation = Talon::Operation.new operation_params
-		operation.action = Talon::Action.find_by_name "issue"
+	def new_operation action
+		operation = action.new operation_params
 		if operation.valid?
 			respond_to {|format| format.js { render partial: "shared/js/add_operation", locals: {item: operation} }}
 		else
@@ -53,7 +52,7 @@ class Talon::DocumentController < ApplicationController
 		params.require(:document).permit(
 			:new_state,
 			:contract_id,
-			operations_attributes: [:talon_barcode, :action_id]
+			operations_attributes: :talon_barcode
 			)
 	end
 
@@ -64,7 +63,7 @@ class Talon::DocumentController < ApplicationController
 	end
 	def operation_params
 		params.require(:operation).permit(
-			:talon_barcode,
-			:action_id)
+			:talon_barcode
+			)
 	end
 end

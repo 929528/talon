@@ -4,7 +4,7 @@ class Catalog::Talon < ActiveRecord::Base
 	belongs_to :state, class_name: "Talon::State"
 	belongs_to :product
 
-	VALID_BARCODE_REGEX = /\A[2,5][1-6]\d{8}\z/
+	VALID_BARCODE_REGEX = /\A[2,5][1-5]\d{8}\z/
 	validates :barcode, presence: true, uniqueness: true, format: { with: VALID_BARCODE_REGEX }
 
 	def initialize attributes = {}

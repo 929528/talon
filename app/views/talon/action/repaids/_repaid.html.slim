@@ -1,0 +1,6 @@
+.operation data-barcode="#{repaid.talon.barcode}"
+	- if repaid.new_record?
+		i class="close icon-remove-sign" onclick="remove_parent(this)"
+	== render partial: "catalog/talons/talon", locals: {talon: repaid.talon}
+	= simple_fields_for "document[operations_attributes][#{repaid.talon.barcode}]", repaid do |o|
+		= o.input_field :talon_barcode, label: false, as: :hidden
